@@ -1,0 +1,15 @@
+function addTagInHoliDay() {
+  let year = globalYear.value;
+  console.log(year);
+
+  const selectedName = globalCountry.options[globalCountry.selectedIndex].text;
+  console.log(selectedName);
+  
+  holidaysSelection.innerHTML = `<div class="current-selection-badge">
+                <img src="https://flagcdn.com/w40/${globalCountry.value.toLowerCase()}.png" alt="${globalCountry.value.toLowerCase()}" class="selection-flag">
+                <span>${selectedName}</span>
+                <span class="selection-year">${year}</span>
+              </div>`;
+
+  getCountryHoliDay();
+}
