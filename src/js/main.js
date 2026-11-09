@@ -157,6 +157,7 @@ globalCountry.addEventListener("change", function () {
                 </div>`;
   getCountryHoliDay();
   getLongWeekend();
+  getCountries()
   getCities();
 });
 //=============================================
@@ -302,7 +303,7 @@ async function getCountries() {
   let result = await response.json();
 
   console.log(result);
-  console.log(Object.keys(result));
+  console.log(Object.keys(result[2]));
 }
 getCountries()
 //==============displayCities===============================
