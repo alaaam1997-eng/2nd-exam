@@ -59,7 +59,7 @@ globalCountry.addEventListener("change", function () {
   getLongWeekend();
   getCities();
 });
- //=============================================
+//=============================================
 
 //=====================removeCountry===================
 function removeCountry() {
@@ -187,21 +187,41 @@ function displayLongWeekend() {
   lwContent.innerHTML = cartoona2;
 }
 // ==========================================================
+// async function getCities() {
+//   let country = globalCountry.options[globalCountry.selectedIndex].text;
+//   await fetch(
+//     `https://api.restcountries.com/countries/v5?q=${encodeURIComponent(country)}`,
+//     {
+//       headers: {
+//         Authorization: "Bearer rc_live_90eb285764224847924b6f273c0ba908",
+//       },
+//     },
+//   )
+
+//   let result = await response.json();
+//   let postList2 = result.data.objects;
+//   console.log(postList2);
+//   displayCity();
+// }
 async function getCities() {
   let country = globalCountry.options[globalCountry.selectedIndex].text;
-  await fetch(
-    `https://api.restcountries.com/countries/v5?q=${encodeURIComponent(country)}`,
-    {
-      headers: {
-        Authorization: "Bearer rc_live_90eb285764224847924b6f273c0ba908",
-      },
-    },
-  )
 
-  let result = await response.json();
-  let postList2 = result.data.objects;
-  console.log(postList2);
-  displayCity();
+  let response = await fetch(
+    "https://countriesnow.space/api/v0.1/countries/cities",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country: country,
+      }),
+    },
+  );
+
+  let data = await response.json();
+
+  console.log(data);
 }
 let postList2 = [];
 function displayCity() {
