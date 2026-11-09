@@ -221,7 +221,7 @@ async function getCities() {
 
   let data = await response.json();
 
-  console.log(data);
+  console.log(data.data);
 }
 let postList2 = [];
 function displayCity() {
