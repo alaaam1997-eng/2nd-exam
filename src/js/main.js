@@ -289,6 +289,7 @@ function displayLongWeekend() {
 // ==========================================================
 async function getCountries() {
   let country = globalCountry.options[globalCountry.selectedIndex].text.toLowerCase();
+
   let response = await fetch(
     `https://api.restcountries.com/countries/v5?q=${country}`,
     {
@@ -296,12 +297,12 @@ async function getCountries() {
         Authorization: "Bearer rc_live_90eb285764224847924b6f273c0ba908",
       },
     },
-  )
+  );
 
   let result = await response.json();
-  let postList3 = Object.keys(result);
-  console.log(postList3);
 
+  console.log(result);
+  console.log(Object.keys(result));
 }
 getCountries()
 //==============displayCities===============================
