@@ -56,74 +56,10 @@ globalCountry.addEventListener("change", function () {
     <button class="clear-selection-btn" onclick="removeCountry()" id="clear-selection-btn">
     <i class="fa-solid fa-xmark"></i>
     </button>`;
-  // countryInformaion.innerHTML = `
-  //   <div class="dashboard-country-header">
-  //     <img
-  //       src="${countryData.flag.url_png}"
-  //       alt="${countryData.names.common}"
-  //       class="dashboard-country-flag"
-  //     />
-
-  //     <div class="dashboard-country-title">
-  //       <h3>${countryData.names.common}</h3>
-
-  //       <p class="official-name">
-  //         ${countryData.names.official}
-  //       </p>
-
-  //       <span class="region">
-  //         <i class="fa-solid fa-location-dot"></i>
-  //         ${countryData.region} • ${countryData.subregion}
-  //       </span>
-  //     </div>
-  //   </div>
-
-  //   <div class="dashboard-country-grid">
-  //     <div class="dashboard-country-detail">
-  //       <i class="fa-solid fa-building-columns"></i>
-  //       <span class="label">Capital</span>
-  //       <span class="value">${countryData.capitals?.[0]?.name}</span>
-  //     </div>
-
-  //     <div class="dashboard-country-detail">
-  //       <i class="fa-solid fa-users"></i>
-  //       <span class="label">Population</span>
-  //       <span class="value">${countryData.population.toLocaleString()}</span>
-  //     </div>
-
-  //     <div class="dashboard-country-detail">
-  //       <i class="fa-solid fa-ruler-combined"></i>
-  //       <span class="label">Area</span>
-  //       <span class="value">${countryData.area.kilometers.toLocaleString()} km²</span>
-  //     </div>
-
-  //     <div class="dashboard-country-detail">
-  //       <i class="fa-solid fa-globe"></i>
-  //       <span class="label">Continent</span>
-  //       <span class="value">${countryData.continents.join(", ")}</span>
-  //     </div>
-
-  //     <div class="dashboard-country-detail">
-  //       <i class="fa-solid fa-phone"></i>
-  //       <span class="label">Calling Code</span>
-  //       <span class="value">+${countryData.calling_codes.join(", +")}</span>
-  //     </div>
-
-  //     <div class="dashboard-country-detail">
-  //       <i class="fa-solid fa-car"></i>
-  //       <span class="label">Driving Side</span>
-  //       <span class="value">${countryData.cars.driving_side}</span>
-  //     </div>
-
-  //     <div class="dashboard-country-detail">
-  //       <i class="fa-solid fa-calendar-week"></i>
-  //       <span class="label">Week Starts</span>
-  //       <span class="value">${countryData.date.start_of_week}</span>
-  //     </div>
-  //   </div>`;
   getCountryHoliDay();
   getLongWeekend();
   getCountries();
+  updateCountryTime();
   getCities();
 });
 //=============================================
@@ -276,21 +212,21 @@ function displayCountry(countryData) {
   let box = `
   <div class="dashboard-country-header">
   <img
-  src="${countryData.flag?.url_png}"
-  alt="${countryData.names?.common}"
+  src="${countryData.flag?.url_png || ""}"
+  alt="${countryData.names?.common || "N/A"}"
   class="dashboard-country-flag"
 />
 
 <div class="dashboard-country-title">
-  <h3>${countryData.names?.common}</h3>
+  <h3>${countryData.names?.common || "N/A"}</h3>
 
   <p class="official-name">
-    ${countryData.names?.official}
+    ${countryData.names?.official || "N/A"}
   </p>
 
   <span class="region">
     <i class="fa-solid fa-location-dot"></i>
-    ${countryData.region} • ${countryData.subregion}
+    ${countryData.region || "N/A"} • ${countryData.subregion || "N/A"}
   </span>
 </div>
 </div>
@@ -299,7 +235,7 @@ function displayCountry(countryData) {
   <div class="local-time-display">
     <i class="fa-solid fa-clock"></i>
     <span class="local-time-value" id="country-local-time">--:--:--</span>
-    <span class="local-time-zone" id="country-time-zone">${countryData.timezones?.[0]}</span>
+    <span class="local-time-zone">${countryData.timezones?.[0]}</span>
   </div>
 </div>
 
@@ -307,25 +243,25 @@ function displayCountry(countryData) {
   <div class="dashboard-country-detail">
     <i class="fa-solid fa-building-columns"></i>
     <span class="label">Capital</span>
-    <span class="value">${countryData.capitals?.[0]?.name}</span>
+    <span class="value">${countryData.capitals?.[0]?.name || "N/A"}</span>
   </div>
 
   <div class="dashboard-country-detail">
     <i class="fa-solid fa-users"></i>
     <span class="label">Population</span>
-    <span class="value">${countryData.population?.toLocaleString()}</span>
+    <span class="value">${countryData.population?.toLocaleString() || "N/A"}</span>
   </div>
 
   <div class="dashboard-country-detail">
     <i class="fa-solid fa-ruler-combined"></i>
     <span class="label">Area</span>
-    <span class="value">${countryData.area?.kilometers?.toLocaleString()} km²</span>
+    <span class="value">${countryData.area?.kilometers?.toLocaleString() || "N/A"} km²</span>
   </div>
 
   <div class="dashboard-country-detail">
     <i class="fa-solid fa-globe"></i>
     <span class="label">Continent</span>
-    <span class="value">${countryData.continents?.join(", ")}</span>
+    <span class="value">${countryData.continents?.join(", ") || "N/A"}</span>
   </div>
 
   <div class="dashboard-country-detail">
@@ -337,13 +273,13 @@ function displayCountry(countryData) {
   <div class="dashboard-country-detail">
     <i class="fa-solid fa-car"></i>
     <span class="label">Driving Side</span>
-    <span class="value">${countryData.cars?.driving_side}</span>
+    <span class="value">${countryData.cars?.driving_side || "N/A"}</span>
   </div>
 
   <div class="dashboard-country-detail">
     <i class="fa-solid fa-calendar-week"></i>
     <span class="label">Week Starts</span>
-    <span class="value">${countryData.date?.start_of_week}</span>
+    <span class="value">${countryData.date?.start_of_week || "N/A"}</span>
   </div>
 </div>
 <div class="dashboard-country-extras">
@@ -357,7 +293,7 @@ function displayCountry(countryData) {
               .map(function (currency) {
                 return `
                 <span class="extra-tag">
-                  ${currency.name} (${currency.code} ${currency.symbol})
+                  ${currency.name} (${currency.code} ${currency.symbol || ""})
                 </span>
               `;
               })
@@ -406,7 +342,7 @@ function displayCountry(countryData) {
 </div>
 <div class="dashboard-country-actions">
   <a
-    href="https://www.google.com/maps/place/${countryData.names?.common}"
+    href="https://www.google.com/maps/place/${countryData.names?.common || ""}"
     target="_blank"
     class="btn-map-link"
   >
@@ -414,41 +350,41 @@ function displayCountry(countryData) {
   </a>
 </div>`;
   countryInformaion.innerHTML = box;
-  //   clearInterval(countryClock);
+  clearInterval(countryClock);
   //   // تحديث الساعة
-  //   let timeZone = countryData.timezones?.[0];
+  let timeZone = countryData.timezones?.[0];
   // console.log("Timezone:", timeZone);
   // console.log("Country Data:", countryData);
   // console.log(countryData.timezones);
-  //   if (timeZone) {
-  //     function updateCountryTime() {
-  //       let now = new Date();
+  if (timeZone) {
+    function updateCountryTime() {
+      let now = new Date();
 
-  //       document.getElementById("country-local-time").innerHTML =
-          // now.toLocaleTimeString("en-US", {
-          //   timeZone: timeZone,
-          //   hour: "2-digit",
-          //   minute: "2-digit",
-          //   second: "2-digit",
-          // });
+      document.getElementById("country-local-time").innerHTML =
+        now.toLocaleTimeString("en-US", {
+          timeZone: timeZone,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
 
-  //       let offset = new Intl.DateTimeFormat("en", {
-  //         timeZone: timeZone,
-  //         timeZoneName: "longOffset",
-  //       })
-  //         .formatToParts(now)
-  //         .find((part) => part.type === "timeZoneName").value;
+      let offset = new Intl.DateTimeFormat("en", {
+        timeZone: timeZone,
+        timeZoneName: "longOffset",
+      })
+        .formatToParts(now)
+        .find((part) => part.type === "timeZoneName").value;
 
-  //       document.getElementById("country-time-zone").innerHTML = offset.replace(
-  //         "GMT",
-  //         "UTC",
-  //       );
-  //     }
+      document.getElementById("country-time-zone").innerHTML = offset.replace(
+        "GMT",
+        "UTC",
+      );
+    }
 
-  //     updateCountryTime();
+    updateCountryTime();
 
-  //     setInterval(updateCountryTime, 1000);
-  //   }
+    setInterval(updateCountryTime, 1000);
+  }
   //  countryInformaion.innerHTML = box;
 }
 //==============displayCities===============================
