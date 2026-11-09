@@ -299,7 +299,7 @@ async function getCountries() {
   )
 
   let result = await response.json();
-  let postList3 = result.keys(result);
+  let postList3 = Object.keys(result);
   console.log(postList3);
 
 }
