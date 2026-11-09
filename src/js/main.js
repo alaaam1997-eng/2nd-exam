@@ -292,7 +292,7 @@ async function getCountries() {
   let country = globalCountry.options[globalCountry.selectedIndex].text.toLowerCase();
 
   let response = await fetch(
-    `https://api.restcountries.com/countries/v5?q=${country}`,
+    `https://api.restcountries.com/countries/v5?q=canada`,
     {
       headers: {
         Authorization: "Bearer rc_live_90eb285764224847924b6f273c0ba908",
