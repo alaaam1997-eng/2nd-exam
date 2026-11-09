@@ -1,5 +1,6 @@
 const globalCountry = document.querySelector("#global-country");
 const globalCity = document.querySelector("#global-city");
+const countryInformaion = document.querySelector("#dashboard-country-info");
 const currencyFrom = document.querySelector("#currency-from");
 const currencyTo = document.querySelector("#currency-to");
 const globalYear = document.querySelector("#global-year.form-select");
@@ -55,6 +56,105 @@ globalCountry.addEventListener("change", function () {
     <button class="clear-selection-btn" onclick="removeCountry()" id="clear-selection-btn">
     <i class="fa-solid fa-xmark"></i>
     </button>`;
+  countryInformaion.innerHTML = `<div class="dashboard-country-header">
+                  <img
+                    src="https://flagcdn.com/w160/eg.png"
+                    alt="Egypt"
+                    class="dashboard-country-flag"
+                  />
+                  <div class="dashboard-country-title">
+                    <h3>Egypt</h3>
+                    <p class="official-name">Arab Republic of Egypt</p>
+                    <span class="region"
+                      ><i class="fa-solid fa-location-dot"></i> Africa •
+                      Northern Africa</span
+                    >
+                  </div>
+                </div>
+
+                <div class="dashboard-local-time">
+                  <div class="local-time-display">
+                    <i class="fa-solid fa-clock"></i>
+                    <span class="local-time-value" id="country-local-time"
+                      >08:30:45 AM</span
+                    >
+                    <span class="local-time-zone">UTC+02:00</span>
+                  </div>
+                </div>
+
+                <div class="dashboard-country-grid">
+                  <div class="dashboard-country-detail">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <span class="label">Capital</span>
+                    <span class="value">Cairo</span>
+                  </div>
+                  <div class="dashboard-country-detail">
+                    <i class="fa-solid fa-users"></i>
+                    <span class="label">Population</span>
+                    <span class="value">102,334,403</span>
+                  </div>
+                  <div class="dashboard-country-detail">
+                    <i class="fa-solid fa-ruler-combined"></i>
+                    <span class="label">Area</span>
+                    <span class="value">1,002,450 km²</span>
+                  </div>
+                  <div class="dashboard-country-detail">
+                    <i class="fa-solid fa-globe"></i>
+                    <span class="label">Continent</span>
+                    <span class="value">Africa</span>
+                  </div>
+                  <div class="dashboard-country-detail">
+                    <i class="fa-solid fa-phone"></i>
+                    <span class="label">Calling Code</span>
+                    <span class="value">+20</span>
+                  </div>
+                  <div class="dashboard-country-detail">
+                    <i class="fa-solid fa-car"></i>
+                    <span class="label">Driving Side</span>
+                    <span class="value">Right</span>
+                  </div>
+                  <div class="dashboard-country-detail">
+                    <i class="fa-solid fa-calendar-week"></i>
+                    <span class="label">Week Starts</span>
+                    <span class="value">Saturday</span>
+                  </div>
+                </div>
+
+                <div class="dashboard-country-extras">
+                  <div class="dashboard-country-extra">
+                    <h4><i class="fa-solid fa-coins"></i> Currency</h4>
+                    <div class="extra-tags">
+                      <span class="extra-tag">Egyptian Pound (EGP £)</span>
+                    </div>
+                  </div>
+                  <div class="dashboard-country-extra">
+                    <h4><i class="fa-solid fa-language"></i> Languages</h4>
+                    <div class="extra-tags">
+                      <span class="extra-tag">Arabic</span>
+                    </div>
+                  </div>
+                  <div class="dashboard-country-extra">
+                    <h4>
+                      <i class="fa-solid fa-map-location-dot"></i> Neighbors
+                    </h4>
+                    <div class="extra-tags">
+                      <span class="extra-tag border-tag">LBY</span>
+                      <span class="extra-tag border-tag">SDN</span>
+                      <span class="extra-tag border-tag">ISR</span>
+                      <span class="extra-tag border-tag">PSE</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="dashboard-country-actions">
+                  <a
+                    href="https://www.google.com/maps/place/Egypt"
+                    target="_blank"
+                    class="btn-map-link"
+                  >
+                    <i class="fa-solid fa-map"></i> View on Google Maps
+                  </a>
+                </div>`;
   getCountryHoliDay();
   getLongWeekend();
   getCities();
@@ -139,7 +239,7 @@ function addTagInHoliDay() {
   }
   getCountryHoliDay();
 }
-//=========================================================
+//======================gitLongWeekEnd===================================
 async function getLongWeekend() {
   const countryCode = globalCountry.value;
   let year = globalYear.value;
@@ -187,23 +287,26 @@ function displayLongWeekend() {
   lwContent.innerHTML = cartoona2;
 }
 // ==========================================================
-// async function getCities() {
-//   let country = globalCountry.options[globalCountry.selectedIndex].text;
-//   await fetch(
-//     `https://api.restcountries.com/countries/v5?q=${encodeURIComponent(country)}`,
-//     {
-//       headers: {
-//         Authorization: "Bearer rc_live_90eb285764224847924b6f273c0ba908",
-//       },
-//     },
-//   )
+async function getCountries() {
+  let country = globalCountry.options[globalCountry.selectedIndex].text.toLowerCase();
+  await fetch(
+    `https://api.restcountries.com/countries/v5?q=${country}`,
+    {
+      headers: {
+        Authorization: "Bearer rc_live_90eb285764224847924b6f273c0ba908",
+      },
+    },
+  )
 
-//   let result = await response.json();
-//   let postList2 = result.data.objects;
-//   console.log(postList2);
-//   displayCity();
-// }
+  let result = await response.json();
+  let postList3 = result.data.objects;
+  console.log(postList3);
+
+}
+getCountries()
+//==============displayCities===============================
 async function getCities() {
+
   let country = globalCountry.options[globalCountry.selectedIndex].text;
 
   let response = await fetch(
@@ -211,28 +314,35 @@ async function getCities() {
     {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        country: country,
-      }),
-    },
+        country: country
+      })
+    }
   );
 
   let data = await response.json();
 
-  console.log(data.data);
+  postList2 = data.data;
+
+  displayCity();
 }
+
 let postList2 = [];
+
 function displayCity() {
+
   let box = "";
+
   for (let i = 0; i < postList2.length; i++) {
-    box += `<option name="${postList2[i].name.common}" value="${postList2[i].codes.alpha_2.toLowerCase()}">${postList[i].name.common}</option>`;
+
+    box += `<option value="${postList2[i]}">${postList2[i]}</option>`;
+
   }
+
   globalCity.innerHTML = box;
 }
-console.log(globalCity);
-
 //=====================================================
 
 let exchangeRates = {};
