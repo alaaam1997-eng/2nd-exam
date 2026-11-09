@@ -11,7 +11,7 @@ const mainView = document.querySelectorAll("#main-content .view");
 const holidaysContent = document.querySelector("#holidays-content");
 const lwContent = document.querySelector("#lw-content");
 const viewHeaderSelection = document.querySelectorAll(".view-header-selection");
-console.log(globalCountry);
+console.log(globalCity);
 
 //=============open & close sideBar===============
 mobileMenuBtn.addEventListener("click", function () {
