@@ -307,7 +307,7 @@ function displayCountry(countryData) {
     <div class="extra-tags">
        ${
          countryData.languages
-           ? Object.values(countryData.languages)
+           ? Object.values(countryData.languages[0])
                .map(function (language) {
                  return `
                 <span class="extra-tag">${language}</span>
