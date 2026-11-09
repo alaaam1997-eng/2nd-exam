@@ -305,17 +305,17 @@ function displayCountry(countryData) {
   <div class="dashboard-country-extra">
     <h4><i class="fa-solid fa-language"></i> Languages</h4>
     <div class="extra-tags">
-      ${
-        countryData.languages
-          ? Object.values(countryData.languages)
-              .map(function (language) {
-                return `
+       ${
+      countryData.languages
+        ? Object.values(countryData.languages)
+            .map(function (language) {
+              return `
                 <span class="extra-tag">${language}</span>
               `;
-              })
-              .join("")
-          : "N/A"
-      }
+            })
+            .join("")
+        : "N/A"
+    }
     </div>
   </div>
 
@@ -359,21 +359,17 @@ function displayCountry(countryData) {
 
       let now = new Date();
 
-      // استخراج فرق التوقيت
       let offset = timeZone.replace("UTC", "");
 
       let hours = Number(offset.slice(0, 3));
       let minutes = Number(offset.slice(4, 6));
 
-      // حساب توقيت الدولة
       let countryTime = new Date(
         now.getTime() + (hours * 60 + Math.sign(hours) * minutes) * 60000
       );
 
       document.getElementById("country-local-time").innerHTML =
         countryTime.toUTCString().slice(17, 25);
-
-      document.getElementById("country-time-zone").innerHTML = timeZone;
     }
 
     updateCountryTime();
