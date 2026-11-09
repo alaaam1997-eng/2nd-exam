@@ -190,14 +190,16 @@ function displayLongWeekend() {
 async function getCities() {
   let country = globalCountry.options[globalCountry.selectedIndex].text;
   await fetch(
-    `https://api.restcountries.com/countries/v5?q=${country}`,
+    `https://api.restcountries.com/countries/v5?q=${encodeURIComponent(country)}`,
     {
       headers: {
         Authorization: "Bearer rc_live_90eb285764224847924b6f273c0ba908",
       },
     },
   )
-  let postList2 = await response.json();
+
+  let result = await response.json();
+  let postList2 = result.data.objects;
   console.log(postList2);
   displayCity();
 }
@@ -205,9 +207,9 @@ let postList2 = [];
 function displayCity() {
   let box = "";
   for (let i = 0; i < postList2.length; i++) {
-    box += `<option name="${postList2[i].name}" value="${postList2[i].countryCode.toLowerCase()}">${postList[i].name}</option>`;
+    box += `<option name="${postList2[i].name.common}" value="${postList2[i].codes.alpha_2.toLowerCase()}">${postList[i].name.common}</option>`;
   }
-  globalCity.innerHTML += box;
+  globalCity.innerHTML = box;
 }
 console.log(globalCity);
 
