@@ -411,6 +411,8 @@ function displayCity() {
   }
 
   globalCity.innerHTML = box;
+  console.log(countryData.languages);
+console.log(Object.values(countryData.languages));
 }
 //=====================================================
 
