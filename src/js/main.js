@@ -306,16 +306,16 @@ function displayCountry(countryData) {
     <h4><i class="fa-solid fa-language"></i> Languages</h4>
     <div class="extra-tags">
        ${
-      countryData.languages
-        ? Object.values(countryData.languages)
-            .map(function (language) {
-              return `
+         countryData.languages
+           ? Object.values(countryData.languages)
+               .map(function (language) {
+                 return `
                 <span class="extra-tag">${language}</span>
               `;
-            })
-            .join("")
-        : "N/A"
-    }
+               })
+               .join("")
+           : "N/A"
+       }
     </div>
   </div>
 
@@ -349,14 +349,12 @@ function displayCountry(countryData) {
   </a>
 </div>`;
   countryInformaion.innerHTML = box;
-    clearInterval(countryClock);
+  clearInterval(countryClock);
 
   let timeZone = countryData.timezones?.[0];
 
   if (timeZone) {
-
     function updateCountryTime() {
-
       let now = new Date();
 
       let offset = timeZone.replace("UTC", "");
@@ -365,16 +363,19 @@ function displayCountry(countryData) {
       let minutes = Number(offset.slice(4, 6));
 
       let countryTime = new Date(
-        now.getTime() + (hours * 60 + Math.sign(hours) * minutes) * 60000
+        now.getTime() + (hours * 60 + Math.sign(hours) * minutes) * 60000,
       );
 
-      document.getElementById("country-local-time").innerHTML =
-        countryTime.toUTCString().slice(17, 25);
+      document.getElementById("country-local-time").innerHTML = countryTime
+        .toUTCString()
+        .slice(17, 25);
     }
 
     updateCountryTime();
 
     countryClock = setInterval(updateCountryTime, 1000);
+    console.log(countryData.languages);
+    console.log(Object.values(countryData.languages));
   }
 }
 //==============displayCities===============================
@@ -411,8 +412,6 @@ function displayCity() {
   }
 
   globalCity.innerHTML = box;
-  console.log(countryData.languages);
-console.log(Object.values(countryData.languages));
 }
 //=====================================================
 
