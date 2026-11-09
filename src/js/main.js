@@ -187,9 +187,9 @@ function displayLongWeekend() {
   lwContent.innerHTML = cartoona2;
 }
 // ==========================================================
-function getCities() {
+async function getCities() {
   let country = globalCountry.options[globalCountry.selectedIndex].text.toLowerCase();
-  fetch(
+  await fetch(
     `https://api.restcountries.com/countries/v5?q=${country.toLowerCase()}`,
     {
       headers: {
@@ -197,13 +197,8 @@ function getCities() {
       },
     },
   )
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-    });
-  console.log(data);
+  let postList2 = await response.json();
+  console.log(postList2);
   displayCity();
 }
 let postList2 = [];
