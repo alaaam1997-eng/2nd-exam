@@ -349,42 +349,37 @@ function displayCountry(countryData) {
   </a>
 </div>`;
   countryInformaion.innerHTML = box;
-  clearInterval(countryClock);
-  //   // تحديث الساعة
+    clearInterval(countryClock);
+
   let timeZone = countryData.timezones?.[0];
-  // console.log("Timezone:", timeZone);
-  // console.log("Country Data:", countryData);
-  // console.log(countryData.timezones);
+
   if (timeZone) {
+
     function updateCountryTime() {
+
       let now = new Date();
 
-      document.getElementById("country-local-time").innerHTML =
-        now.toLocaleTimeString("en-US", {
-          timeZone: timeZone,
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        });
+      // استخراج فرق التوقيت
+      let offset = timeZone.replace("UTC", "");
 
-      let offset = new Intl.DateTimeFormat("en", {
-        timeZone: timeZone,
-        timeZoneName: "longOffset",
-      })
-        .formatToParts(now)
-        .find((part) => part.type === "timeZoneName").value;
+      let hours = Number(offset.slice(0, 3));
+      let minutes = Number(offset.slice(4, 6));
 
-      document.getElementById("country-time-zone").innerHTML = offset.replace(
-        "GMT",
-        "UTC",
+      // حساب توقيت الدولة
+      let countryTime = new Date(
+        now.getTime() + (hours * 60 + Math.sign(hours) * minutes) * 60000
       );
+
+      document.getElementById("country-local-time").innerHTML =
+        countryTime.toUTCString().slice(17, 25);
+
+      document.getElementById("country-time-zone").innerHTML = timeZone;
     }
 
     updateCountryTime();
 
-    setInterval(updateCountryTime, 1000);
+    countryClock = setInterval(updateCountryTime, 1000);
   }
-  //  countryInformaion.innerHTML = box;
 }
 //==============displayCities===============================
 async function getCities() {
