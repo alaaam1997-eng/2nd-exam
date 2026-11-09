@@ -302,8 +302,8 @@ async function getCountries() {
 
   let result = await response.json();
 
-  console.log(result);
-  console.log(Object.keys(result[2]));
+  console.log(result.data.Object);
+  // console.log(Object.keys(result));
 }
 getCountries()
 //==============displayCities===============================
