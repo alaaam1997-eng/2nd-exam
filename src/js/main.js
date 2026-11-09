@@ -271,8 +271,8 @@ async function getCountries() {
   let countryData = result.data.objects[0];
   displayCountry(countryData);
 }
+let countryClock;
 function displayCountry(countryData) {
-
   let box = `<img
   src="${countryData.flag?.url_png || ""}"
   alt="${countryData.names?.common || "N/A"}"
@@ -296,10 +296,8 @@ function displayCountry(countryData) {
 <div class="dashboard-local-time">
   <div class="local-time-display">
     <i class="fa-solid fa-clock"></i>
-    <span class="local-time-value" id="country-local-time">
-      08:30:45 AM
-    </span>
-    <span class="local-time-zone">UTC+02:00</span>
+    <span class="local-time-value" id="country-local-time">--:--:--</span>
+    <span class="local-time-zone" id="country-time-zone">UTC</span>
   </div>
 </div>
 
@@ -353,13 +351,15 @@ function displayCountry(countryData) {
     <div class="extra-tags">
       ${
         countryData.currencies
-          ? Object.values(countryData.currencies).map(function(currency) {
-              return `
+          ? Object.values(countryData.currencies)
+              .map(function (currency) {
+                return `
                 <span class="extra-tag">
                   ${currency.name} (${currency.code} ${currency.symbol || ""})
                 </span>
               `;
-            }).join("")
+              })
+              .join("")
           : "N/A"
       }
     </div>
@@ -370,11 +370,13 @@ function displayCountry(countryData) {
     <div class="extra-tags">
       ${
         countryData.languages
-          ? Object.values(countryData.languages).map(function(language) {
-              return `
+          ? Object.values(countryData.languages)
+              .map(function (language) {
+                return `
                 <span class="extra-tag">${language}</span>
               `;
-            }).join("")
+              })
+              .join("")
           : "N/A"
       }
     </div>
@@ -387,11 +389,13 @@ function displayCountry(countryData) {
     <div class="extra-tags">
       ${
         countryData.borders?.length
-          ? countryData.borders.map(function(neighbor) {
-              return `
+          ? countryData.borders
+              .map(function (neighbor) {
+                return `
                 <span class="extra-tag border-tag">${neighbor}</span>
               `;
-            }).join("")
+              })
+              .join("")
           : "No Neighbors"
       }
     </div>
@@ -407,8 +411,41 @@ function displayCountry(countryData) {
     <i class="fa-solid fa-map"></i> View on Google Maps
   </a>
 </div>`;
+  countryInformaion.innerHTML = box;
+  clearInterval(countryClock);
+  // تحديث الساعة
+  let timeZone = countryData.timezones?.[0];
 
- countryInformaion.innerHTML = box;
+  if (timeZone) {
+    function updateCountryTime() {
+      let now = new Date();
+
+      document.getElementById("country-local-time").innerHTML =
+        now.toLocaleTimeString("en-US", {
+          timeZone: timeZone,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+
+      let offset = new Intl.DateTimeFormat("en", {
+        timeZone: timeZone,
+        timeZoneName: "longOffset",
+      })
+        .formatToParts(now)
+        .find((part) => part.type === "timeZoneName").value;
+
+      document.getElementById("country-time-zone").innerHTML = offset.replace(
+        "GMT",
+        "UTC",
+      );
+    }
+
+    updateCountryTime();
+
+    setInterval(updateCountryTime, 1000);
+  }
+  //  countryInformaion.innerHTML = box;
 }
 //==============displayCities===============================
 async function getCities() {
