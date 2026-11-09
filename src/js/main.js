@@ -59,7 +59,6 @@ globalCountry.addEventListener("change", function () {
   getCountryHoliDay();
   getLongWeekend();
   getCountries();
-  updateCountryTime();
   getCities();
 });
 //=============================================
