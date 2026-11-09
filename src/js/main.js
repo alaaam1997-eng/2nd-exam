@@ -11,8 +11,6 @@ const mainView = document.querySelectorAll("#main-content .view");
 const holidaysContent = document.querySelector("#holidays-content");
 const lwContent = document.querySelector("#lw-content");
 const viewHeaderSelection = document.querySelectorAll(".view-header-selection");
-console.log(globalCity);
-
 //=============open & close sideBar===============
 mobileMenuBtn.addEventListener("click", function () {
   sideBar.classList.add("open");
@@ -59,7 +57,9 @@ globalCountry.addEventListener("change", function () {
     </button>`;
   getCountryHoliDay();
   getLongWeekend();
+  getCities();
 });
+ //=============================================
 
 //=====================removeCountry===================
 function removeCountry() {
@@ -188,12 +188,15 @@ function displayLongWeekend() {
 }
 // ==========================================================
 function getCities() {
-  let country = globalCountry.name.toLowerCase();
-  fetch(`https://api.restcountries.com/countries/v5?q=${country}`, {
-    headers: {
-      Authorization: "Bearer rc_live_90eb285764224847924b6f273c0ba908",
+  let country = globalCountry.name;
+  fetch(
+    `https://api.restcountries.com/countries/v5?q=${country.toLowerCase()}`,
+    {
+      headers: {
+        Authorization: "Bearer rc_live_90eb285764224847924b6f273c0ba908",
+      },
     },
-  })
+  )
     .then(function (response) {
       return response.json();
     })
