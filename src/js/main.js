@@ -415,7 +415,9 @@ function displayCountry(countryData) {
   clearInterval(countryClock);
   // تحديث الساعة
   let timeZone = countryData.timezones?.[0];
-
+console.log("Timezone:", timeZone);
+console.log("Country Data:", countryData);
+console.log(countryData.timezones);
   if (timeZone) {
     function updateCountryTime() {
       let now = new Date();
