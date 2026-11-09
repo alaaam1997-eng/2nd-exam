@@ -289,7 +289,7 @@ function displayLongWeekend() {
 // ==========================================================
 async function getCountries() {
   let country = globalCountry.options[globalCountry.selectedIndex].text.toLowerCase();
-  await fetch(
+  let response = await fetch(
     `https://api.restcountries.com/countries/v5?q=${country}`,
     {
       headers: {
