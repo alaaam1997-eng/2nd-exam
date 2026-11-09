@@ -272,7 +272,6 @@ async function getCountries() {
   displayCountry(countryData);
 }
 function displayCountry(countryData) {
-
   let box = `<img
   src="${countryData.flag?.url_png || ""}"
   alt="${countryData.names?.common || "N/A"}"
@@ -296,13 +295,37 @@ function displayCountry(countryData) {
 <div class="dashboard-local-time">
   <div class="local-time-display">
     <i class="fa-solid fa-clock"></i>
+
     <span class="local-time-value" id="country-local-time">
-      08:30:45 AM
+      ${
+        countryData.timezones?.[0]
+          ? new Date().toLocaleTimeString("en-US", {
+              timeZone: countryData.timezones[0],
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+              hour12: true,
+            })
+          : "N/A"
+      }
     </span>
-    <span class="local-time-zone">UTC+02:00</span>
+
+    <span class="local-time-zone">
+      ${
+        countryData.timezones?.[0]
+          ? "UTC" +
+            new Intl.DateTimeFormat("en", {
+              timeZone: countryData.timezones[0],
+              timeZoneName: "longOffset",
+            })
+              .formatToParts(new Date())
+              .find((part) => part.type === "timeZoneName")
+              .value.replace("GMT", "")
+          : "N/A"
+      }
+    </span>
   </div>
 </div>
-
 <div class="dashboard-country-grid">
   <div class="dashboard-country-detail">
     <i class="fa-solid fa-building-columns"></i>
@@ -346,30 +369,64 @@ function displayCountry(countryData) {
     <span class="value">${countryData.date?.start_of_week || "N/A"}</span>
   </div>
 </div>
-
 <div class="dashboard-country-extras">
+
   <div class="dashboard-country-extra">
     <h4><i class="fa-solid fa-coins"></i> Currency</h4>
     <div class="extra-tags">
-      <span class="extra-tag">CURRENCY DATA</span>
+      ${
+        countryData.currencies
+          ? Object.values(countryData.currencies)
+              .map(function (currency) {
+                return `
+                <span class="extra-tag">
+                  ${currency.name} (${currency.code} ${currency.symbol || ""})
+                </span>
+              `;
+              })
+              .join("")
+          : "N/A"
+      }
     </div>
   </div>
 
   <div class="dashboard-country-extra">
     <h4><i class="fa-solid fa-language"></i> Languages</h4>
     <div class="extra-tags">
-      <span class="extra-tag">LANGUAGE DATA</span>
+      ${
+        countryData.languages
+          ? Object.values(countryData.languages)
+              .map(function (language) {
+                return `
+                <span class="extra-tag">${language}</span>
+              `;
+              })
+              .join("")
+          : "N/A"
+      }
     </div>
   </div>
 
   <div class="dashboard-country-extra">
-    <h4><i class="fa-solid fa-map-location-dot"></i> Neighbors</h4>
+    <h4>
+      <i class="fa-solid fa-map-location-dot"></i> Neighbors
+    </h4>
     <div class="extra-tags">
-      <span class="extra-tag border-tag">NEIGHBOR DATA</span>
+      ${
+        countryData.borders?.length
+          ? countryData.borders
+              .map(function (neighbor) {
+                return `
+                <span class="extra-tag border-tag">${neighbor}</span>
+              `;
+              })
+              .join("")
+          : "No Neighbors"
+      }
     </div>
   </div>
-</div>
 
+</div>
 <div class="dashboard-country-actions">
   <a
     href="https://www.google.com/maps/place/${countryData.names?.common || ""}"
@@ -380,7 +437,7 @@ function displayCountry(countryData) {
   </a>
 </div>`;
 
- countryInformaion.innerHTML = box;
+  countryInformaion.innerHTML = box;
 }
 //==============displayCities===============================
 async function getCities() {
