@@ -1,4 +1,5 @@
 const globalCountry = document.querySelector("#global-country");
+const globalCity = document.querySelector("#global-city");
 const currencyFrom = document.querySelector("#currency-from");
 const currencyTo = document.querySelector("#currency-to");
 const globalYear = document.querySelector("#global-year.form-select");
@@ -10,6 +11,8 @@ const mainView = document.querySelectorAll("#main-content .view");
 const holidaysContent = document.querySelector("#holidays-content");
 const lwContent = document.querySelector("#lw-content");
 const viewHeaderSelection = document.querySelectorAll(".view-header-selection");
+console.log(globalCountry);
+
 //=============open & close sideBar===============
 mobileMenuBtn.addEventListener("click", function () {
   sideBar.classList.add("open");
@@ -127,7 +130,6 @@ function displayContryHoliDay() {
 function addTagInHoliDay() {
   let year = globalYear.value;
   const selectedName = globalCountry.options[globalCountry.selectedIndex].text;
-  console.log(selectedName);
   for (let i = 0; i < viewHeaderSelection.length; i++) {
     viewHeaderSelection[i].innerHTML = `<div class="current-selection-badge">
                 <img src="https://flagcdn.com/w40/${globalCountry.value.toLowerCase()}.png" alt="${globalCountry.value.toLowerCase()}" class="selection-flag">
@@ -150,9 +152,6 @@ async function getLongWeekend() {
 getLongWeekend();
 let countryLongWeekend = [];
 function displayLongWeekend() {
-  console.log("Display function started");
-  console.log("lwContent:", lwContent);
-  console.log("Array length:", countryLongWeekend.length);
   let year = globalYear.value;
 
   let cartoona2 = "";
@@ -188,30 +187,61 @@ function displayLongWeekend() {
   lwContent.innerHTML = cartoona2;
 }
 // ==========================================================
+function getCities() {
+  let country = globalCountry.value;
+  fetch(`https://api.restcountries.com/countries/v5?q=${country}`, {
+    headers: {
+      Authorization: "Bearer rc_live_90eb285764224847924b6f273c0ba908",
+    },
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+  console.log(data);
+  displayCity();
+}
+let postList2 = [];
+function displayCity() {
+  let box = "";
+  for (let i = 0; i < postList2.length; i++) {
+    box += `<option name="${postList2[i].name}" value="${postList2[i].countryCode.toLowerCase()}">${postList[i].name}</option>`;
+  }
+  globalCity.innerHTML += box;
+}
+console.log(globalCity);
 
+//=====================================================
 
 let exchangeRates = {};
 
 async function getCurrencies() {
   let response = await fetch(
-    "https://v6.exchangerate-api.com/v6/805842951e5953ad31497176/latest/USD"
+    `https://v6.exchangerate-api.com/v6/805842951e5953ad31497176/latest/USD`,
   );
 
   let data = await response.json();
-
-  if (data.result !== "success") {
-    console.log(data);
-    return;
-  }
 
   exchangeRates = data.conversion_rates;
 
   displayCurrencies();
 }
 
+// async function getCurrencies() {
+//   let from = currencyFrom.value;
+//   let to = currencyTo.value;
+//   let response = await fetch(
+//     `https://v6.exchangerate-api.com/v6/805842951e5953ad31497176/pair/${from}/${to}/100`,
+//   );
+
+//   let data = await response.json();
+
+//   exchangeRates = data.conversion_rates;
+// }
+
 getCurrencies();
-
-
 
 function displayCurrencies() {
   let box = "";
@@ -225,7 +255,7 @@ function displayCurrencies() {
   currencyFrom.innerHTML = box;
   currencyTo.innerHTML = box;
 
-//   currencyTo.value = "EGP";
+  //   currencyTo.value = "EGP";
 }
 
 ///////////////////////////////////////////////////////////
