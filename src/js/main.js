@@ -203,6 +203,8 @@ function getCities() {
   console.log(data);
   displayCity();
 }
+console.log(globalCountry.value);
+
 let postList2 = [];
 function displayCity() {
   let box = "";
