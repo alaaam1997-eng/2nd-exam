@@ -188,7 +188,7 @@ function displayLongWeekend() {
 }
 // ==========================================================
 function getCities() {
-  let country = globalCountry.value;
+  let country = globalCountry.name.toLowerCase();
   fetch(`https://api.restcountries.com/countries/v5?q=${country}`, {
     headers: {
       Authorization: "Bearer rc_live_90eb285764224847924b6f273c0ba908",
@@ -203,7 +203,7 @@ function getCities() {
   console.log(data);
   displayCity();
 }
-console.log(globalCountry.value);
+console.log(globalCountry.name);
 
 let postList2 = [];
 function displayCity() {
