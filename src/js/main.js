@@ -56,71 +56,71 @@ globalCountry.addEventListener("change", function () {
     <button class="clear-selection-btn" onclick="removeCountry()" id="clear-selection-btn">
     <i class="fa-solid fa-xmark"></i>
     </button>`;
-  countryInformaion.innerHTML = `
-    <div class="dashboard-country-header">
-      <img
-        src="${countryData.flag.url_png}"
-        alt="${countryData.names.common}"
-        class="dashboard-country-flag"
-      />
+  // countryInformaion.innerHTML = `
+  //   <div class="dashboard-country-header">
+  //     <img
+  //       src="${countryData.flag.url_png}"
+  //       alt="${countryData.names.common}"
+  //       class="dashboard-country-flag"
+  //     />
 
-      <div class="dashboard-country-title">
-        <h3>${countryData.names.common}</h3>
+  //     <div class="dashboard-country-title">
+  //       <h3>${countryData.names.common}</h3>
 
-        <p class="official-name">
-          ${countryData.names.official}
-        </p>
+  //       <p class="official-name">
+  //         ${countryData.names.official}
+  //       </p>
 
-        <span class="region">
-          <i class="fa-solid fa-location-dot"></i>
-          ${countryData.region} • ${countryData.subregion}
-        </span>
-      </div>
-    </div>
+  //       <span class="region">
+  //         <i class="fa-solid fa-location-dot"></i>
+  //         ${countryData.region} • ${countryData.subregion}
+  //       </span>
+  //     </div>
+  //   </div>
 
-    <div class="dashboard-country-grid">
-      <div class="dashboard-country-detail">
-        <i class="fa-solid fa-building-columns"></i>
-        <span class="label">Capital</span>
-        <span class="value">${countryData.capitals?.[0]?.name || "N/A"}</span>
-      </div>
+  //   <div class="dashboard-country-grid">
+  //     <div class="dashboard-country-detail">
+  //       <i class="fa-solid fa-building-columns"></i>
+  //       <span class="label">Capital</span>
+  //       <span class="value">${countryData.capitals?.[0]?.name || "N/A"}</span>
+  //     </div>
 
-      <div class="dashboard-country-detail">
-        <i class="fa-solid fa-users"></i>
-        <span class="label">Population</span>
-        <span class="value">${countryData.population.toLocaleString()}</span>
-      </div>
+  //     <div class="dashboard-country-detail">
+  //       <i class="fa-solid fa-users"></i>
+  //       <span class="label">Population</span>
+  //       <span class="value">${countryData.population.toLocaleString()}</span>
+  //     </div>
 
-      <div class="dashboard-country-detail">
-        <i class="fa-solid fa-ruler-combined"></i>
-        <span class="label">Area</span>
-        <span class="value">${countryData.area.kilometers.toLocaleString()} km²</span>
-      </div>
+  //     <div class="dashboard-country-detail">
+  //       <i class="fa-solid fa-ruler-combined"></i>
+  //       <span class="label">Area</span>
+  //       <span class="value">${countryData.area.kilometers.toLocaleString()} km²</span>
+  //     </div>
 
-      <div class="dashboard-country-detail">
-        <i class="fa-solid fa-globe"></i>
-        <span class="label">Continent</span>
-        <span class="value">${countryData.continents.join(", ")}</span>
-      </div>
+  //     <div class="dashboard-country-detail">
+  //       <i class="fa-solid fa-globe"></i>
+  //       <span class="label">Continent</span>
+  //       <span class="value">${countryData.continents.join(", ")}</span>
+  //     </div>
 
-      <div class="dashboard-country-detail">
-        <i class="fa-solid fa-phone"></i>
-        <span class="label">Calling Code</span>
-        <span class="value">+${countryData.calling_codes.join(", +")}</span>
-      </div>
+  //     <div class="dashboard-country-detail">
+  //       <i class="fa-solid fa-phone"></i>
+  //       <span class="label">Calling Code</span>
+  //       <span class="value">+${countryData.calling_codes.join(", +")}</span>
+  //     </div>
 
-      <div class="dashboard-country-detail">
-        <i class="fa-solid fa-car"></i>
-        <span class="label">Driving Side</span>
-        <span class="value">${countryData.cars.driving_side}</span>
-      </div>
+  //     <div class="dashboard-country-detail">
+  //       <i class="fa-solid fa-car"></i>
+  //       <span class="label">Driving Side</span>
+  //       <span class="value">${countryData.cars.driving_side}</span>
+  //     </div>
 
-      <div class="dashboard-country-detail">
-        <i class="fa-solid fa-calendar-week"></i>
-        <span class="label">Week Starts</span>
-        <span class="value">${countryData.date.start_of_week}</span>
-      </div>
-    </div>`;
+  //     <div class="dashboard-country-detail">
+  //       <i class="fa-solid fa-calendar-week"></i>
+  //       <span class="label">Week Starts</span>
+  //       <span class="value">${countryData.date.start_of_week}</span>
+  //     </div>
+  //   </div>`;
   getCountryHoliDay();
   getLongWeekend();
   getCountries();
