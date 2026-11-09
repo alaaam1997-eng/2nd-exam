@@ -268,7 +268,7 @@ async function getCountries() {
   );
 
   let result = await response.json();
-  let countryData = result.data.objects;
+  let countryData = result.data.objects[0];
   displayCountry(countryData);
 }
 function displayCountry(countryData) {
