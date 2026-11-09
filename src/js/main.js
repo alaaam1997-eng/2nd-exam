@@ -254,7 +254,7 @@ function displayLongWeekend() {
   lwContent.innerHTML = cartoona2;
 }
 // ==========================================================
-async function getCountries(countryData) {
+async function getCountries() {
   let country =
     globalCountry.options[globalCountry.selectedIndex].text.toLowerCase();
 
@@ -269,6 +269,7 @@ async function getCountries(countryData) {
 
   let result = await response.json();
   let countryData = result.data.objects;
+  displayCountry(countryData);
 }
 function displayCountry(countryData) {
 
