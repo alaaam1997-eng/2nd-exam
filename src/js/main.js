@@ -41,8 +41,8 @@ function displayContry() {
 
 globalYear.addEventListener("change", function () {
   getCountryHoliDay();
+  getCountry1()
 });
-getCountry();
 
 //=====================viewCountry===================
 globalCountry.addEventListener("change", function () {
@@ -63,7 +63,9 @@ globalCountry.addEventListener("change", function () {
   getCities();
 });
 //=============================================
-
+globalCity.addEventListener("change",function(){
+  getCountry1()
+})
 //=====================removeCountry===================
 function removeCountry() {
   selectedDestination.classList.add("hidden");
