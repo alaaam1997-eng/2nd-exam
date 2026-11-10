@@ -41,7 +41,7 @@ function displayContry() {
 
 globalYear.addEventListener("change", function () {
   getCountryHoliDay();
-  getCountry1();
+  getEventCard();
 });
 getCountry();
 //=====================viewCountry===================
@@ -60,12 +60,12 @@ globalCountry.addEventListener("change", function () {
   getCountryHoliDay();
   getLongWeekend();
   getCountries();
-  getCountry1();
+  getEventCard();
   getCities();
 });
 //=============================================
 globalCity.addEventListener("change", function () {
-  getCountry1();
+  getEventCard();
 });
 //=====================removeCountry===================
 function removeCountry() {
@@ -455,10 +455,8 @@ function displayCurrencies() {
 
   //   currencyTo.value = "EGP";
 }
-
-// ///////////////////////////////////////////////////////////
-
-async function getCountry1() {
+//===================eventCard======================
+async function getEventCard() {
   let city1 = globalCity.value;
   let country1 = globalCountry.value;
   const response = await fetch(
@@ -504,3 +502,29 @@ function displayEventCard() {
   }
   eventsContent.innerHTML = box;
 }
+//=====================weather==================
+async function getCityCoordinates() {
+  let city = globalCity.value;
+  let country = globalCountry.value;
+
+let response = await fetch(
+  `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=10&countryCode=${country}&language=en&format=json`
+);
+let lat = data.results[0].latitude;
+let lon = data.results[0].longitude;
+let data = await response.json();
+  
+let response2 = await fetch(
+  `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=today&formatted=0`
+);
+
+let sunriseData = await response2.json();
+
+console.log(sunriseData.results);
+
+
+console.log(lat, lon);
+}
+getCityCoordinates()
+// ///////////////////////////////////////////////////////////
+
