@@ -64,6 +64,7 @@ globalCountry.addEventListener("change", function () {
   getLongWeekend();
   getEventCard();
   getCities();
+  getCityCoordinates()
 });
 //=============================================
 globalCity.addEventListener("change", function () {
