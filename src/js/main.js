@@ -831,6 +831,7 @@ async function getCurrencies() {
   exchangeRates = data.conversion_rates;
   displayCurrencies();
   currency();
+  displayPopularCurrencies()
 }
 
 let formattedDate = "";
@@ -869,6 +870,18 @@ function displayCurrencies() {
 
   currencyFrom.innerHTML = box;
   currencyTo.innerHTML = box;
+}
+function displayPopularCurrencies() {
+  let popularCurrencies = document.querySelectorAll(
+    ".popular-currency-card"
+  );
+
+  popularCurrencies.forEach(function (card) {
+    let currencyCode = card.querySelector(".code").innerHTML;
+    let rate = card.querySelector(".rate");
+
+    rate.innerHTML = exchangeRates[currencyCode].toFixed(4);
+  });
 }
 convertBtn.addEventListener("click", currency);
 let today = new Date();
