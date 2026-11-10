@@ -41,7 +41,7 @@ function displayContry() {
 
 globalYear.addEventListener("change", function () {
   getCountryHoliDay();
-  getCountry1()
+  getCountry1();
 });
 getCountry();
 //=====================viewCountry===================
@@ -60,12 +60,13 @@ globalCountry.addEventListener("change", function () {
   getCountryHoliDay();
   getLongWeekend();
   getCountries();
+  getCountry1();
   getCities();
 });
 //=============================================
-globalCity.addEventListener("change",function(){
-  getCountry1()
-})
+globalCity.addEventListener("change", function () {
+  getCountry1();
+});
 //=====================removeCountry===================
 function removeCountry() {
   selectedDestination.classList.add("hidden");
@@ -467,7 +468,7 @@ async function getCountry1() {
   eventCard = data._embedded?.events || [];
   displayEventCard();
 }
-let eventCard =[]
+let eventCard = [];
 function displayEventCard() {
   let box = "";
   for (let i = 0; i < eventCard.length; i++) {
