@@ -510,9 +510,9 @@ async function getCityCoordinates() {
 let response = await fetch(
   `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=10&countryCode=${country}&language=en&format=json`
 );
+let data = await response.json();
 let lat = data.results[0].latitude;
 let lon = data.results[0].longitude;
-let data = await response.json();
   
 let response2 = await fetch(
   `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=today&formatted=0`
