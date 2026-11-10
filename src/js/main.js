@@ -796,7 +796,7 @@ function displayWeatherhourlyForecast() {
       hour12: true,
       timeZone: weatherData.timezone,
     });
-    box += `<div class="hourly-item now">
+    box += `<div class="hourly-item ${i === startIndex ? "Now" : hour}">
                     <span class="hourly-time">${i === startIndex ? "Now" : hour}</span>
                     <div class="hourly-icon">
                       <i class="fa-solid fa-sun"></i>
