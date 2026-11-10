@@ -173,8 +173,35 @@ function displayLongWeekend() {
       timeZone: "UTC",
     });
     let needDays = countryLongWeekend[i].needBridgeDay
-      ? "No extra days off needed!"
-      : "Requires taking a bridge day off";
+      ? "Requires taking a bridge day off"
+      : "No extra days off needed!";
+    let daysVisual = "";
+
+    let currentDate = new Date(startDate + "T00:00:00Z");
+    let lastDate = new Date(endDate + "T00:00:00Z");
+
+    while (currentDate <= lastDate) {
+      let dayName = currentDate.toLocaleDateString("en-US", {
+        weekday: "short",
+        timeZone: "UTC",
+      });
+
+      let dayNumber = currentDate.getUTCDate();
+
+      let weekendClass = "";
+
+      if (currentDate.getUTCDay() === 5 || currentDate.getUTCDay() === 6) {
+        weekendClass = "weekend";
+      }
+      daysVisual += `
+   <div class="lw-day ${weekendClass}">
+      <span class="name">${dayName}</span>
+      <span class="num">${dayNumber}</span>
+    </div>
+  `;
+
+      currentDate.setUTCDate(currentDate.getUTCDate() + 1);
+    }
     cartoona2 += `<div class="lw-card">
               <div class="lw-card-header">
                 <span class="lw-badge"><i class="fa-solid fa-calendar-days"></i> ${countryLongWeekend[i].dayCount} Days</span>
@@ -183,12 +210,7 @@ function displayLongWeekend() {
               <h3>Long Weekend #${i + 1}</h3>
               <div class="lw-dates"><i class="fa-regular fa-calendar"></i> ${month} ${startDay} - ${month} ${endDay}, ${year}</div>
               <div class="lw-info-box success"><i class="fa-solid fa-check-circle"></i> ${needDays}</div>
-              <div class="lw-days-visual">
-                <div class="lw-day"><span class="name">Thu</span><span class="num">1</span></div>
-                <div class="lw-day weekend"><span class="name">Fri</span><span class="num">2</span></div>
-                <div class="lw-day weekend"><span class="name">Sat</span><span class="num">3</span></div>
-                <div class="lw-day weekend"><span class="name">Sun</span><span class="num">4</span></div>
-              </div>
+             <div class="lw-days-visual">${daysVisual}</div>
             </div>`;
   }
 
