@@ -532,6 +532,18 @@ function displayCitySunRise() {
   let dayLength = sunriseData.results.day_length;
   let hours = Math.floor(dayLength / 3600);
   let minutes = Math.floor((dayLength % 3600) / 60);
+  function convertTo12Hour(time) {
+    return new Date(time).toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  }
+  sunSet = convertTo12Hour(sunSet);
+  sunRise = convertTo12Hour(sunRise);
+  solarNoon = convertTo12Hour(solarNoon);
+  dawn = convertTo12Hour(dawn);
+  dusk = convertTo12Hour(dusk);
 
   box += `              <div class="sun-main-card">
                 <div class="sun-main-header">
