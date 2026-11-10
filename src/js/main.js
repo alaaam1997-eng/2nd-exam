@@ -70,6 +70,9 @@ globalCity.addEventListener("change", function () {
   getEventCard();
   getCityCoordinates();
 });
+globalSearchBtn.addEventListener("click", function () {
+  getCountries()
+});
 //=====================removeCountry===================
 function removeCountry() {
   selectedDestination.classList.add("hidden");
