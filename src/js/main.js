@@ -1,11 +1,8 @@
+const dashboardView = document.querySelector("#dashboard-view");
 const globalCountry = document.querySelector("#global-country");
 const globalSearchBtn = document.querySelector("#global-search-btn");
 const globalCity = document.querySelector("#global-city");
 const eventsContent = document.querySelector("#events-content");
-const weatherHeroCard = document.querySelector(".weather-hero-card");
-const WeatherDeatails = document.querySelector(".weather-details-grid");
-const hourlyForecast = document.querySelector(".hourly-scroll");
-const dailyForecast = document.querySelector(".forecast-list");
 const weatherContent = document.querySelector("#weather-content");
 const sunTimesContent = document.querySelector("#sun-times-content");
 const countryInformaion = document.querySelector("#dashboard-country-info");
@@ -24,6 +21,7 @@ const conversionDisplay = document.querySelector(".conversion-display");
 const convertBtn = document.querySelector("#convert-btn");
 const exchangeRateInfo = document.querySelector(".exchange-rate-info");
 const viewHeaderSelection = document.querySelectorAll(".view-header-selection");
+const dashboardButtons = document.querySelectorAll(".go-dashboard");
 //=============open & close sideBar===============
 mobileMenuBtn.addEventListener("click", function () {
   sideBar.classList.add("open");
@@ -107,6 +105,19 @@ sideBarLinks.forEach(function (button) {
 
     history.pushState(null, "", `#${viewName}`);
     target.classList.add("active");
+    sideBar.classList.remove("open");
+  });
+});
+dashboardButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
+    mainView.forEach(function (section) {
+      section.classList.remove("active");
+    });
+
+    document.getElementById("dashboard-view").classList.add("active");
+
+    history.pushState(null, "", "#dashboard");
+
     sideBar.classList.remove("open");
   });
 });
