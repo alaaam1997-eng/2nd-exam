@@ -66,6 +66,8 @@ globalCountry.addEventListener("change", function () {
 //=============================================
 globalCity.addEventListener("change", function () {
   getEventCard();
+  getCityCoordinates();
+
 });
 //=====================removeCountry===================
 function removeCountry() {
