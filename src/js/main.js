@@ -524,17 +524,18 @@ async function getCityCoordinates() {
 let sunriseData = [];
 function displayCitySunRise() {
   let box = "";
-  let city = globalCity.value
-  let year = globalYear.value 
-let date = new Date(sunriseData.results.sunrise);
-let formattedDate = date.toLocaleDateString("en-US", {
-  month: "long",
-  day: "numeric",
-  year: "numeric",
-});
-let dayName = date.toLocaleDateString("en-US", {
-  weekday: "long",
-});  let sunSet = sunriseData.results.sunset.split("T")[1].slice(0, 5);
+  let city = globalCity.value;
+  let year = globalYear.value;
+  let date = new Date(sunriseData.results.sunrise);
+  let formattedDate = date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+  let dayName = date.toLocaleDateString("en-US", {
+    weekday: "long",
+  });
+  let sunSet = sunriseData.results.sunset.split("T")[1].slice(0, 5);
   let sunRise = sunriseData.results.sunrise.split("T")[1].slice(0, 5);
   let solarNoon = sunriseData.results.solar_noon.split("T")[1].slice(0, 5);
   let dawn = sunriseData.results.civil_twilight_begin.split("T")[1].slice(0, 5);
@@ -547,7 +548,6 @@ let dayName = date.toLocaleDateString("en-US", {
   let hoursNight = Math.floor(nightLength / 3600);
   let minutesNight = Math.floor((nightLength % 3600) / 60);
 
-
   box += `              <div class="sun-main-card">
                 <div class="sun-main-header">
                   <div class="sun-location">
@@ -555,7 +555,7 @@ let dayName = date.toLocaleDateString("en-US", {
                     <p>Sun times for your selected location</p>
                   </div>
                   <div class="sun-date-display">
-                    <div class="date">${formattedDate} ${year}</div>
+                    <div class="date">${formattedDate}</div>
                     <div class="day">${dayName}</div>
                   </div>
                 </div>
