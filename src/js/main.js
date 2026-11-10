@@ -790,7 +790,7 @@ function displayWeatherhourlyForecast() {
 
   if (startIndex === -1) startIndex = 0;
   for (let i = startIndex; i < startIndex + 24; i++) {
-    let temperature = Math.round(weatherData.daily.temperature_2m[i]);
+    let temperature = Math.round(weatherData.hourly.temperature_2m[i]);
     let time = new Date(weatherData.hourly.time[i]);
 
     let hour = time.toLocaleTimeString("en-US", {
@@ -823,13 +823,16 @@ function displayWeatherdailyForecast() {
       day: "numeric",
       timeZone: weatherData.timezone,
     });
-
+    let day = date.toLocaleDateString("en-US", {
+      weekday: "short",
+      timeZone: weatherData.timezone,
+    });
     let maxTemp = Math.round(weatherData.daily.temperature_2m_max[i]);
     let minTemp = Math.round(weatherData.daily.temperature_2m_min[i]);
 
-    box += `<div class="forecast-day today">
+    box += `<div class="forecast-day ${i === startIndex ? "today" : ""}">
                     <div class="forecast-day-name">
-                      <span class="day-label ${i === startIndex ? "Today" : ""}">${i === startIndex ? "Today" : day}</span
+                      <span class="day-label">${i === startIndex ? "Today" : day}</span
                       ><span class="day-date">${dayDate}</span>
                     </div>
                     <div class="forecast-icon">
