@@ -43,7 +43,7 @@ globalYear.addEventListener("change", function () {
   getCountryHoliDay();
   getCountry1()
 });
-
+getCountry();
 //=====================viewCountry===================
 globalCountry.addEventListener("change", function () {
   const selectedName = this.options[this.selectedIndex].text;
