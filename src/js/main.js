@@ -1,5 +1,6 @@
 const globalCountry = document.querySelector("#global-country");
 const globalCity = document.querySelector("#global-city");
+const eventsContent = document.querySelector("#events-content");
 const countryInformaion = document.querySelector("#dashboard-country-info");
 const currencyFrom = document.querySelector("#currency-from");
 const currencyTo = document.querySelector("#currency-to");
@@ -374,8 +375,6 @@ function displayCountry(countryData) {
     updateCountryTime();
 
     countryClock = setInterval(updateCountryTime, 1000);
-    console.log(countryData.languages);
-    console.log(Object.values(countryData.languages));
   }
 }
 //==============displayCities===============================
@@ -401,9 +400,7 @@ async function getCities() {
 
   displayCity();
 }
-
 let postList2 = [];
-
 function displayCity() {
   let box = "";
 
@@ -414,9 +411,7 @@ function displayCity() {
   globalCity.innerHTML = box;
 }
 //=====================================================
-
 let exchangeRates = {};
-
 async function getCurrencies() {
   let response = await fetch(
     `https://v6.exchangerate-api.com/v6/805842951e5953ad31497176/latest/USD`,
@@ -459,3 +454,50 @@ function displayCurrencies() {
 }
 
 ///////////////////////////////////////////////////////////
+
+async function getCountry() {
+  let city = globalCity.value;
+  let country = globalCountry.value;
+  const response = await fetch(
+    `https://app.ticketmaster.com/discovery/v2/events.json?apikey=VwECw2OiAzxVzIqnwmKJUG41FbeXJk1y&city=${city}&${country}=US&size=20`,
+  );
+  let data = await response.json();
+  eventCard = data._embedded?.events || [];
+  displayEventCard();
+}
+let eventCard =[]
+function displayEventCard() {
+  let box = "";
+  for (let i = 0; i < eventCard.length; i++) {
+    box += `<div class="event-card">
+                <div class="event-card-image">
+                  <img
+                    src="${eventCard[i].images[0].url || ""}"
+                  />
+                  <span class="event-card-category">${eventCard[i].classifications?.[0]?.segment?.name || "Other"}</span>
+                  <button class="event-card-save">
+                    <i class="fa-regular fa-heart"></i>
+                  </button>
+                </div>
+                <div class="event-card-body">
+                  <h3>${eventCard[i].name}</h3>
+                  <div class="event-card-info">
+                    <div>
+                      <i class="fa-regular fa-calendar"></i>${eventCard[i].dates?.start?.dateTime || "Date unavailable"}
+                    </div>
+                    <div>
+                      <i class="fa-solid fa-location-dot"></i>${eventCard[i]._embedded?.venues?.[0]?.name || "Location unavailable"}</div>
+                  </div>
+                  <div class="event-card-footer">
+                    <button class="btn-event">
+                      <i class="fa-regular fa-heart"></i> Save
+                    </button>
+                    <a href="${eventCard[i].url}" class="btn-buy-ticket"
+                      ><i class="fa-solid fa-ticket"></i> Buy Tickets</a
+                    >
+                  </div>
+                </div>
+              </div>`;
+  }
+  eventsContent.innerHTML = box;
+}
