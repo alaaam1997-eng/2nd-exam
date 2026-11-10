@@ -782,9 +782,6 @@ function displayWeatherDeatails() {
 function displayWeatherhourlyForecast() {
   let box = "";
   let currentTime = new Date(weatherData.current.time);
-  console.log("Current API Time:", weatherData.current.time);
-  console.log("Current Hourly Time:", weatherData.hourly.time[startIndex]);
-  console.log("Start Index:", startIndex);
   let startIndex = weatherData.hourly.time.findIndex(function (time) {
     return new Date(time).getTime() >= currentTime.getTime();
   });
