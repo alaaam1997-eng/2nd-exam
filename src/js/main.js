@@ -504,7 +504,7 @@ function displayEventCard() {
   }
   eventsContent.innerHTML = box;
 }
-//=====================weather==================
+//=====================weather&sunRise==================
 async function getCityCoordinates() {
   let city = globalCity.value;
   let country = globalCountry.value;
@@ -519,13 +519,17 @@ async function getCityCoordinates() {
     `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=today&formatted=0`,
   );
   sunriseData = await response2.json();
+  let response3 = await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,uv_index&hourly=temperature_2m,weather_code,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_direction_10m_dominant&timezone=auto`,
+  );
+  weatherData = await response3.json();
+
   displayCitySunRise();
 }
 let sunriseData = [];
 function displayCitySunRise() {
   let box = "";
   let city = globalCity.value;
-  let year = globalYear.value;
   let date = new Date(sunriseData.results.sunrise);
   let formattedDate = date.toLocaleDateString("en-US", {
     month: "long",
@@ -628,5 +632,110 @@ function displayCitySunRise() {
               </div>`;
   sunTimesContent.innerHTML = box;
 }
+// function displayWeather() {
+//   let box = "";
+//   let city = globalCity.value;
+//   let date = new Date(sunriseData.results.sunrise);
+//   let formattedDate = date.toLocaleDateString("en-US", {
+//     month: "long",
+//     day: "numeric",
+//     year: "numeric",
+//   });
+//   let dayName = date.toLocaleDateString("en-US", {
+//     weekday: "long",
+//   });
+//   let sunSet = sunriseData.results.sunset.split("T")[1].slice(0, 5);
+//   let sunRise = sunriseData.results.sunrise.split("T")[1].slice(0, 5);
+//   let solarNoon = sunriseData.results.solar_noon.split("T")[1].slice(0, 5);
+//   let dawn = sunriseData.results.civil_twilight_begin.split("T")[1].slice(0, 5);
+//   let dusk = sunriseData.results.civil_twilight_end.split("T")[1].slice(0, 5);
+//   let dayLength = sunriseData.results.day_length;
+//   let dayPercentage = (dayLength / 86400) * 100;
+//   let nightLength = 86400 - dayLength;
+//   let hours = Math.floor(dayLength / 3600);
+//   let minutes = Math.floor((dayLength % 3600) / 60);
+//   let hoursNight = Math.floor(nightLength / 3600);
+//   let minutesNight = Math.floor((nightLength % 3600) / 60);
+
+//   box += `              <div class="sun-main-card">
+//                 <div class="sun-main-header">
+//                   <div class="sun-location">
+//                     <h2><i class="fa-solid fa-location-dot"></i> ${city}</h2>
+//                     <p>Sun times for your selected location</p>
+//                   </div>
+//                   <div class="sun-date-display">
+//                     <div class="date">${formattedDate}</div>
+//                     <div class="day">${dayName}</div>
+//                   </div>
+//                 </div>
+
+//                 <div class="sun-times-grid">
+//                   <div class="sun-time-card dawn">
+//                     <div class="icon"><i class="fa-solid fa-moon"></i></div>
+//                     <div class="label">Dawn</div>
+//                     <div class="time">${dawn} AM</div>
+//                     <div class="sub-label">Civil Twilight</div>
+//                   </div>
+//                   <div class="sun-time-card sunrise">
+//                     <div class="icon"><i class="fa-solid fa-sun"></i></div>
+//                     <div class="label">Sunrise</div>
+//                     <div class="time">${sunRise} AM</div>
+//                     <div class="sub-label">Golden Hour Start</div>
+//                   </div>
+//                   <div class="sun-time-card noon">
+//                     <div class="icon"><i class="fa-solid fa-sun"></i></div>
+//                     <div class="label">Solar Noon</div>
+//                     <div class="time">${solarNoon} PM</div>
+//                     <div class="sub-label">Sun at Highest</div>
+//                   </div>
+//                   <div class="sun-time-card sunset">
+//                     <div class="icon"><i class="fa-solid fa-sun"></i></div>
+//                     <div class="label">Sunset</div>
+//                     <div class="time">${sunSet} PM</div>
+//                     <div class="sub-label">Golden Hour End</div>
+//                   </div>
+//                   <div class="sun-time-card dusk">
+//                     <div class="icon"><i class="fa-solid fa-moon"></i></div>
+//                     <div class="label">Dusk</div>
+//                     <div class="time">${dusk} PM</div>
+//                     <div class="sub-label">Civil Twilight</div>
+//                   </div>
+//                   <div class="sun-time-card daylight">
+//                     <div class="icon">
+//                       <i class="fa-solid fa-hourglass-half"></i>
+//                     </div>
+//                     <div class="label">Day Length</div>
+//                     <div class="time">${hours}h ${minutes}m</div>
+//                     <div class="sub-label">Total Daylight</div>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               <div class="day-length-card">
+//                 <h3>
+//                   <i class="fa-solid fa-chart-pie"></i> Daylight Distribution
+//                 </h3>
+//                 <div class="day-progress">
+//                   <div class="day-progress-bar">
+//                     <div class="day-progress-fill" style="width: ${dayPercentage.toFixed(1)}%"></div>
+//                   </div>
+//                 </div>
+//                 <div class="day-length-stats">
+//                   <div class="day-stat">
+//                     <div class="value">${hours}h ${minutes}m</div>
+//                     <div class="label">Daylight</div>
+//                   </div>
+//                   <div class="day-stat">
+//                     <div class="value">${dayPercentage.toFixed(1)}%</div>
+//                     <div class="label">of 24 Hours</div>
+//                   </div>
+//                   <div class="day-stat">
+//                     <div class="value">${hoursNight}h ${minutesNight}m</div>
+//                     <div class="label">Darkness</div>
+//                   </div>
+//                 </div>
+//               </div>`;
+//   sunTimesContent.innerHTML = box;
+// }
 
 // ///////////////////////////////////////////////////////////
