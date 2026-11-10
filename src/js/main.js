@@ -553,6 +553,7 @@ async function getCityCoordinates() {
   weatherData = await response3.json();
 
   displayCitySunRise();
+  displayWeather();
 }
 let sunriseData = [];
 function displayCitySunRise() {
