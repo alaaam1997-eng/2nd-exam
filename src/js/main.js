@@ -97,6 +97,8 @@ sideBarLinks.forEach(function (button) {
       section.classList.remove("active");
     });
     const target = document.getElementById(this.dataset.view);
+    console.log(target);
+
     target.classList.add("active");
     sideBar.classList.remove("open");
   });
