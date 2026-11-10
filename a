@@ -265,3 +265,271 @@ let weatherData = {};
 //               </div>`;
 //   sunTimesContent.innerHTML = box;
 // }
+//
+let weatherData = {};
+// function displayWeather() {
+//   let box = "";
+//   let country = globalCountry.value;
+// let temperature = weatherData.current.temperature_2m
+// let apparentTemperature = weatherData.current.apparent_temperature
+// let humidity = weatherData.current.relative_humidity_2m
+// let windSpeed = weatherData.current.wind_speed_10m
+// let uvIndex = weatherData.current.uv_index
+//   let date = new Date(weatherData.current.time);
+//   let formattedDate = date.toLocaleDateString("en-US", {
+//     month: "long",
+//     day: "numeric",
+//     year: "numeric",
+//   });
+//   let dayName = date.toLocaleDateString("en-US", {
+//     weekday: "long",
+//   });
+
+//   box += `               <div class="weather-hero-card weather-sunny">
+//                 <div class="weather-location">
+//                   <i class="fa-solid fa-location-dot"></i>
+//                   <span>${country}</span>
+//                   <span class="weather-time">${dayName}, ${formattedDate}</span>
+//                 </div>
+//                 <div class="weather-hero-main">
+//                   <div class="weather-hero-left">
+//                     <div class="weather-hero-icon">
+//                       <i class="fa-solid fa-sun"></i>
+//                     </div>
+//                     <div class="weather-hero-temp">
+//                       <span class="temp-value">${temperature}</span>
+//                       <span class="temp-unit">°C</span>
+//                     </div>
+//                   </div>
+//                   <div class="weather-hero-right">
+//                     <div class="weather-condition">Clear sky</div>
+//                     <div class="weather-feels">Feels like ${apparentTemperature}°C</div>
+//                     <div class="weather-high-low">
+//                       <span class="high"
+//                         ><i class="fa-solid fa-arrow-up"></i> 25°</span
+//                       >
+//                       <span class="low"
+//                         ><i class="fa-solid fa-arrow-down"></i> 12°</span
+//                       >
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               <!-- Weather Details Grid -->
+//               <div class="weather-details-grid">
+//                 <div class="weather-detail-card">
+//                   <div class="detail-icon humidity">
+//                     <i class="fa-solid fa-droplet"></i>
+//                   </div>
+//                   <div class="detail-info">
+//                     <span class="detail-label">${humidity}</span>
+//                     <span class="detail-value">45%</span>
+//                   </div>
+//                 </div>
+//                 <div class="weather-detail-card">
+//                   <div class="detail-icon wind">
+//                     <i class="fa-solid fa-wind"></i>
+//                   </div>
+//                   <div class="detail-info">
+//                     <span class="detail-label">Wind</span>
+//                     <span class="detail-value">${windSpeed} km/h</span>
+//                   </div>
+//                 </div>
+//                 <div class="weather-detail-card">
+//                   <div class="detail-icon uv">
+//                     <i class="fa-solid fa-sun"></i>
+//                   </div>
+//                   <div class="detail-info">
+//                     <span class="detail-label">UV Index</span>
+//                     <span class="detail-value">${uvIndex}</span>
+//                   </div>
+//                 </div>
+//                 <div class="weather-detail-card">
+//                   <div class="detail-icon precip">
+//                     <i class="fa-solid fa-cloud-rain"></i>
+//                   </div>
+//                   <div class="detail-info">
+//                     <span class="detail-label">Precipitation</span>
+//                     <span class="detail-value">0%</span>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               <!-- Hourly Forecast -->
+//               <div class="weather-section">
+//                 <h3 class="weather-section-title">
+//                   <i class="fa-solid fa-clock"></i> Hourly Forecast
+//                 </h3>
+//                 <div class="hourly-scroll">
+//                   <div class="hourly-item now">
+//                     <span class="hourly-time">Now</span>
+//                     <div class="hourly-icon">
+//                       <i class="fa-solid fa-sun"></i>
+//                     </div>
+//                     <span class="hourly-temp">22°</span>
+//                   </div>
+//                   <div class="hourly-item">
+//                     <span class="hourly-time">10 AM</span>
+//                     <div class="hourly-icon">
+//                       <i class="fa-solid fa-sun"></i>
+//                     </div>
+//                     <span class="hourly-temp">23°</span>
+//                   </div>
+//                   <div class="hourly-item">
+//                     <span class="hourly-time">11 AM</span>
+//                     <div class="hourly-icon">
+//                       <i class="fa-solid fa-sun"></i>
+//                     </div>
+//                     <span class="hourly-temp">24°</span>
+//                   </div>
+//                   <div class="hourly-item">
+//                     <span class="hourly-time">12 PM</span>
+//                     <div class="hourly-icon">
+//                       <i class="fa-solid fa-sun"></i>
+//                     </div>
+//                     <span class="hourly-temp">25°</span>
+//                   </div>
+//                   <div class="hourly-item">
+//                     <span class="hourly-time">1 PM</span>
+//                     <div class="hourly-icon">
+//                       <i class="fa-solid fa-sun"></i>
+//                     </div>
+//                     <span class="hourly-temp">25°</span>
+//                   </div>
+//                   <div class="hourly-item">
+//                     <span class="hourly-time">2 PM</span>
+//                     <div class="hourly-icon">
+//                       <i class="fa-solid fa-cloud-sun"></i>
+//                     </div>
+//                     <span class="hourly-temp">24°</span>
+//                   </div>
+//                   <div class="hourly-item">
+//                     <span class="hourly-time">3 PM</span>
+//                     <div class="hourly-icon">
+//                       <i class="fa-solid fa-cloud-sun"></i>
+//                     </div>
+//                     <span class="hourly-temp">23°</span>
+//                   </div>
+//                   <div class="hourly-item">
+//                     <span class="hourly-time">4 PM</span>
+//                     <div class="hourly-icon">
+//                       <i class="fa-solid fa-cloud"></i>
+//                     </div>
+//                     <span class="hourly-temp">21°</span>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               <!-- 7-Day Forecast -->
+//               <div class="weather-section">
+//                 <h3 class="weather-section-title">
+//                   <i class="fa-solid fa-calendar-week"></i> 7-Day Forecast
+//                 </h3>
+//                 <div class="forecast-list">
+//                   <div class="forecast-day today">
+//                     <div class="forecast-day-name">
+//                       <span class="day-label">Today</span
+//                       ><span class="day-date">25 Jan</span>
+//                     </div>
+//                     <div class="forecast-icon">
+//                       <i class="fa-solid fa-sun"></i>
+//                     </div>
+//                     <div class="forecast-temps">
+//                       <span class="temp-max">25°</span
+//                       ><span class="temp-min">12°</span>
+//                     </div>
+//                     <div class="forecast-precip"></div>
+//                   </div>
+//                   <div class="forecast-day">
+//                     <div class="forecast-day-name">
+//                       <span class="day-label">Sun</span
+//                       ><span class="day-date">26 Jan</span>
+//                     </div>
+//                     <div class="forecast-icon">
+//                       <i class="fa-solid fa-sun"></i>
+//                     </div>
+//                     <div class="forecast-temps">
+//                       <span class="temp-max">24°</span
+//                       ><span class="temp-min">11°</span>
+//                     </div>
+//                     <div class="forecast-precip"></div>
+//                   </div>
+//                   <div class="forecast-day">
+//                     <div class="forecast-day-name">
+//                       <span class="day-label">Mon</span
+//                       ><span class="day-date">27 Jan</span>
+//                     </div>
+//                     <div class="forecast-icon">
+//                       <i class="fa-solid fa-cloud-sun"></i>
+//                     </div>
+//                     <div class="forecast-temps">
+//                       <span class="temp-max">23°</span
+//                       ><span class="temp-min">12°</span>
+//                     </div>
+//                     <div class="forecast-precip">
+//                       <i class="fa-solid fa-droplet"></i><span>10%</span>
+//                     </div>
+//                   </div>
+//                   <div class="forecast-day">
+//                     <div class="forecast-day-name">
+//                       <span class="day-label">Tue</span
+//                       ><span class="day-date">28 Jan</span>
+//                     </div>
+//                     <div class="forecast-icon">
+//                       <i class="fa-solid fa-cloud"></i>
+//                     </div>
+//                     <div class="forecast-temps">
+//                       <span class="temp-max">21°</span
+//                       ><span class="temp-min">10°</span>
+//                     </div>
+//                     <div class="forecast-precip">
+//                       <i class="fa-solid fa-droplet"></i><span>20%</span>
+//                     </div>
+//                   </div>
+//                   <div class="forecast-day">
+//                     <div class="forecast-day-name">
+//                       <span class="day-label">Wed</span
+//                       ><span class="day-date">29 Jan</span>
+//                     </div>
+//                     <div class="forecast-icon">
+//                       <i class="fa-solid fa-sun"></i>
+//                     </div>
+//                     <div class="forecast-temps">
+//                       <span class="temp-max">22°</span
+//                       ><span class="temp-min">11°</span>
+//                     </div>
+//                     <div class="forecast-precip"></div>
+//                   </div>
+//                   <div class="forecast-day">
+//                     <div class="forecast-day-name">
+//                       <span class="day-label">Thu</span
+//                       ><span class="day-date">30 Jan</span>
+//                     </div>
+//                     <div class="forecast-icon">
+//                       <i class="fa-solid fa-sun"></i>
+//                     </div>
+//                     <div class="forecast-temps">
+//                       <span class="temp-max">24°</span
+//                       ><span class="temp-min">12°</span>
+//                     </div>
+//                     <div class="forecast-precip"></div>
+//                   </div>
+//                   <div class="forecast-day">
+//                     <div class="forecast-day-name">
+//                       <span class="day-label">Fri</span
+//                       ><span class="day-date">31 Jan</span>
+//                     </div>
+//                     <div class="forecast-icon">
+//                       <i class="fa-solid fa-sun"></i>
+//                     </div>
+//                     <div class="forecast-temps">
+//                       <span class="temp-max">25°</span
+//                       ><span class="temp-min">13°</span>
+//                     </div>
+//                     <div class="forecast-precip"></div>
+//                   </div>
+//                 </div>
+//               </div>`;
+//   sunTimesContent.innerHTML = box;
+// }

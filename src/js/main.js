@@ -64,6 +64,7 @@ globalCountry.addEventListener("change", function () {
   // getCountries();
   getEventCard();
   getCities();
+  displayWeather();
 });
 //=============================================
 globalCity.addEventListener("change", function () {
@@ -71,7 +72,7 @@ globalCity.addEventListener("change", function () {
   getCityCoordinates();
 });
 globalSearchBtn.addEventListener("click", function () {
-  getCountries()
+  getCountries();
 });
 //=====================removeCountry===================
 function removeCountry() {
@@ -663,11 +664,11 @@ let weatherData = {};
 function displayWeather() {
   let box = "";
   let country = globalCountry.value;
-let temperature = weatherData.current.temperature_2m
-let apparentTemperature = weatherData.current.apparent_temperature
-let humidity = weatherData.current.relative_humidity_2m
-let windSpeed = weatherData.current.wind_speed_10m
-let uvIndex = weatherData.current.uv_index
+  let temperature = weatherData.current.temperature_2m;
+  let apparentTemperature = weatherData.current.apparent_temperature;
+  let humidity = weatherData.current.relative_humidity_2m;
+  let windSpeed = weatherData.current.wind_speed_10m;
+  let uvIndex = weatherData.current.uv_index;
   let date = new Date(weatherData.current.time);
   let formattedDate = date.toLocaleDateString("en-US", {
     month: "long",
