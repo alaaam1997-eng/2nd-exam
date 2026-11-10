@@ -538,7 +538,7 @@ async function getCityCoordinates() {
   let country = globalCountry.value;
 
   let response = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=10&countryCode=${country}&language=en&format=json`,
+    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city) ||encodeURIComponent(country)}&count=10&countryCode=${country}&language=en&format=json`,
   );
   let data = await response.json();
   let lat = data.results[0].latitude;
