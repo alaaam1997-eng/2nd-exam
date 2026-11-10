@@ -633,6 +633,7 @@ function displayCitySunRise() {
   sunTimesContent.innerHTML = box;
 }
 let weatherData = {};
+
 function displayWeatherHeroCard() {
   let box = "";
   let selectedName = globalCountry.options[globalCountry.selectedIndex].text;
@@ -757,7 +758,7 @@ function displayWeatherHeroCard() {
                   <i class="fa-solid fa-clock"></i> Hourly Forecast
                 </h3>
                 <div class="hourly-scroll">
-                ${hourlyBox}
+                ${displayHourlyForecast()}
                 </div>
                 </div>
                               <div class="weather-section">
@@ -765,125 +766,95 @@ function displayWeatherHeroCard() {
                   <i class="fa-solid fa-calendar-week"></i> 7-Day Forecast
                 </h3>
                 <div class="forecast-list">
-                ${dailyBox}
+                ${displayDailyForecast()}
                 </div>
                 </div>
                 `;
   weatherContent.innerHTML = box;
 }
-// function displayWeatherDeatails() {
-//   let box = "";
-//   // let humidity = weatherData.current.relative_humidity_2m;
-//   // let windSpeed = weatherData.current.wind_speed_10m;
-//   // let uvIndex = weatherData.current.uv_index;
-//   // let rainChance = weatherData.hourly.precipitation_probability[0];
-//   box = `<div class="weather-detail-card">
-//                   <div class="detail-icon humidity">
-//                     <i class="fa-solid fa-droplet"></i>
-//                   </div>
-//                   <div class="detail-info">
-//                     <span class="detail-label">Humidity</span>
-//                     <span class="detail-value">${humidity}%</span>
-//                   </div>
-//                 </div>
-//                 <div class="weather-detail-card">
-//                   <div class="detail-icon wind">
-//                     <i class="fa-solid fa-wind"></i>
-//                   </div>
-//                   <div class="detail-info">
-//                     <span class="detail-label">Wind</span>
-//                     <span class="detail-value">${windSpeed} km/h</span>
-//                   </div>
-//                 </div>
-//                 <div class="weather-detail-card">
-//                   <div class="detail-icon uv">
-//                     <i class="fa-solid fa-sun"></i>
-//                   </div>
-//                   <div class="detail-info">
-//                     <span class="detail-label">UV Index</span>
-//                     <span class="detail-value">${uvIndex}</span>
-//                   </div>
-//                 </div>
-//                 <div class="weather-detail-card">
-//                   <div class="detail-icon precip">
-//                     <i class="fa-solid fa-cloud-rain"></i>
-//                   </div>
-//                   <div class="detail-info">
-//                     <span class="detail-label">Precipitation</span>
-//                     <span class="detail-value">${rainChance}%</span>
-//                   </div>
-//                 </div>`;
-//   WeatherDeatails.innerHTML = box;
-// }
-// function displayWeatherhourlyForecast() {
-let hourlyBox = "";
-// let currentTime = new Date(weatherData.current.time);
-// let startIndex = weatherData.hourly.time.findIndex(function (time) {
-//   return new Date(time).getTime() >= currentTime.getTime();
-// });
+function displayHourlyForecast() {
+  let currentTime = new Date(weatherData.current.time);
 
-// if (startIndex === -1) startIndex = 0;
-for (let i = startIndex; i < startIndex + 24; i++) {
-  let temperature = Math.round(weatherData.hourly.temperature_2m[i]);
-  let time = new Date(weatherData.hourly.time[i]);
-
-  let hour = time.toLocaleTimeString("en-US", {
-    hour: "numeric",
-    hour12: true,
-    timeZone: weatherData.timezone,
+  let startIndex = weatherData.hourly.time.findIndex(function (time) {
+    return new Date(time).getTime() >= currentTime.getTime();
   });
-  hourlyBox += `<div class="hourly-item ${i === startIndex ? "now" : ""}">
-                    <span class="hourly-time">${i === startIndex ? "Now" : hour}</span>
-                    <div class="hourly-icon">
-                      <i class="fa-solid fa-sun"></i>
-                    </div>
-                    <span class="hourly-temp">${temperature}°</span>
-                  </div>`;
+
+  if (startIndex === -1) startIndex = 0;
+
+  let hourlyBox = "";
+
+  for (
+    let i = startIndex;
+    i < Math.min(startIndex + 24, weatherData.hourly.time.length);
+    i++
+  ) {
+    let temperature = Math.round(weatherData.hourly.temperature_2m[i]);
+    let time = new Date(weatherData.hourly.time[i]);
+
+    let hour = time.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      hour12: true,
+      timeZone: weatherData.timezone,
+    });
+
+    hourlyBox += `
+      <div class="hourly-item ${i === startIndex ? "now" : ""}">
+        <span class="hourly-time">
+          ${i === startIndex ? "Now" : hour}
+        </span>
+        <div class="hourly-icon">
+          <i class="fa-solid fa-sun"></i>
+        </div>
+        <span class="hourly-temp">${temperature}°</span>
+      </div>`;
+  }
+
+  return hourlyBox;
 }
-// hourlyForecast.innerHTML = box;
-// }
-// function displayWeatherdailyForecast() {
-// let dailyBox = "";
-// let currentTime = new Date(weatherData.current.time);
-// let startIndex = weatherData.daily.time.findIndex(function (time) {
-//   return new Date(time).getTime() >= currentTime.getTime();
-// });
-// if (startIndex === -1) startIndex = 0;
-let dailyBox = "";
+function displayDailyForecast() {
+  let dailyBox = "";
 
-for (let i = 0; i < 7; i++) {
-  let date = new Date(weatherData.daily.time[i]);
+  for (let i = 0; i < 7; i++) {
+    let date = new Date(weatherData.daily.time[i]);
 
-  let dayDate = date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    timeZone: weatherData.timezone,
-  });
-  let day = date.toLocaleDateString("en-US", {
-    weekday: "short",
-    timeZone: weatherData.timezone,
-  });
-  let maxTemp = Math.round(weatherData.daily.temperature_2m_max[i]);
-  let minTemp = Math.round(weatherData.daily.temperature_2m_min[i]);
+    let dayDate = date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      timeZone: weatherData.timezone,
+    });
 
-  dailyBox += `<div class="forecast-day ${i === startIndex ? "today" : ""}">
-                    <div class="forecast-day-name">
-                      <span class="day-label">${i === startIndex ? "Today" : day}</span
-                      ><span class="day-date">${dayDate}</span>
-                    </div>
-                    <div class="forecast-icon">
-                      <i class="fa-solid fa-sun"></i>
-                    </div>
-                    <div class="forecast-temps">
-                      <span class="temp-max">${maxTemp}°</span
-                      ><span class="temp-min">${minTemp}°</span>
-                    </div>
-                    <div class="forecast-precip"></div>
-                  </div>`;
+    let day = date.toLocaleDateString("en-US", {
+      weekday: "short",
+      timeZone: weatherData.timezone,
+    });
+
+    let maxTemp = Math.round(weatherData.daily.temperature_2m_max[i]);
+    let minTemp = Math.round(weatherData.daily.temperature_2m_min[i]);
+
+    dailyBox += `
+      <div class="forecast-day ${i === 0 ? "today" : ""}">
+        <div class="forecast-day-name">
+          <span class="day-label">${i === 0 ? "Today" : day}</span>
+          <span class="day-date">${dayDate}</span>
+        </div>
+
+        <div class="forecast-icon">
+          <i class="fa-solid fa-sun"></i>
+        </div>
+
+        <div class="forecast-temps">
+          <span class="temp-max">${maxTemp}°</span>
+          <span class="temp-min">${minTemp}°</span>
+        </div>
+
+        <div class="forecast-precip"></div>
+      </div>`;
+  }
+
+  return dailyBox;
 }
 
-// dailyForecast.innerHTML = box;
-// }
+
 //=====================Currency================================
 async function getCurrencies() {
   let response = await fetch(
