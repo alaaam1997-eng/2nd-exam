@@ -522,9 +522,6 @@ async function getCityCoordinates() {
   weatherData = await response3.json();
   displayCitySunRise();
   displayWeatherHeroCard();
-  // displayWeatherDeatails();
-  // displayWeatherhourlyForecast();
-  // displayWeatherdailyForecast();
 }
 let sunriseData = [];
 function displayCitySunRise() {
@@ -853,7 +850,6 @@ function displayDailyForecast() {
 
   return dailyBox;
 }
-
 
 //=====================Currency================================
 async function getCurrencies() {
