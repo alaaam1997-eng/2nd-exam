@@ -3,6 +3,8 @@ const globalSearchBtn = document.querySelector("#global-search-btn");
 const globalCity = document.querySelector("#global-city");
 const eventsContent = document.querySelector("#events-content");
 const weatherHeroCard = document.querySelector(".weather-hero-card");
+const WeatherDeatails = document.querySelector(".weather-details-grid");
+const hourlyForecast = document.querySelector(".hourly-scroll");
 const sunTimesContent = document.querySelector("#sun-times-content");
 const countryInformaion = document.querySelector("#dashboard-country-info");
 const currencyFrom = document.querySelector("#currency-from");
@@ -551,7 +553,9 @@ async function getCityCoordinates() {
   );
   weatherData = await response3.json();
   displayCitySunRise();
-  displayWeather();
+  displayWeatherHeroCard();
+  displayWeatherDeatails();
+  displayWeatherDeatailshourlyForecast();
 }
 let sunriseData = [];
 function displayCitySunRise() {
@@ -660,15 +664,13 @@ function displayCitySunRise() {
   sunTimesContent.innerHTML = box;
 }
 let weatherData = {};
-function displayWeather() {
+function displayWeatherHeroCard() {
   let box = "";
   let selectedName = globalCountry.options[globalCountry.selectedIndex].text;
   let temperature = weatherData.current.temperature_2m;
   let apparentTemperature = weatherData.current.apparent_temperature;
   let maxTemp = Math.max(...weatherData.daily.temperature_2m_max);
   let minTemp = Math.min(...weatherData.daily.temperature_2m_min);
-  let windSpeed = weatherData.current.wind_speed_10m;
-  let uvIndex = weatherData.current.uv_index;
   let date = new Date(weatherData.current.time);
   let formattedDate = date.toLocaleDateString("en-US", {
     month: "long",
@@ -701,7 +703,7 @@ function displayWeather() {
   }
   let weatherCode = weatherData.current.weather_code;
 
-let condition = getWeatherCondition(weatherCode);
+  let condition = getWeatherCondition(weatherCode);
 
   box = `<div class="weather-location">
                   <i class="fa-solid fa-location-dot"></i>
@@ -732,4 +734,70 @@ let condition = getWeatherCondition(weatherCode);
                   </div>
                 </div>`;
   weatherHeroCard.innerHTML = box;
+}
+function displayWeatherDeatails() {
+  let box = "";
+  let humidity = weatherData.current.relative_humidity_2m;
+  let windSpeed = weatherData.current.wind_speed_10m;
+  let uvIndex = weatherData.current.uv_index;
+  let rainChance = weatherData.hourly.precipitation_probability[0];
+  box = `<div class="weather-detail-card">
+                  <div class="detail-icon humidity">
+                    <i class="fa-solid fa-droplet"></i>
+                  </div>
+                  <div class="detail-info">
+                    <span class="detail-label">Humidity</span>
+                    <span class="detail-value">${humidity}%</span>
+                  </div>
+                </div>
+                <div class="weather-detail-card">
+                  <div class="detail-icon wind">
+                    <i class="fa-solid fa-wind"></i>
+                  </div>
+                  <div class="detail-info">
+                    <span class="detail-label">Wind</span>
+                    <span class="detail-value">${windSpeed} km/h</span>
+                  </div>
+                </div>
+                <div class="weather-detail-card">
+                  <div class="detail-icon uv">
+                    <i class="fa-solid fa-sun"></i>
+                  </div>
+                  <div class="detail-info">
+                    <span class="detail-label">UV Index</span>
+                    <span class="detail-value">${uvIndex}</span>
+                  </div>
+                </div>
+                <div class="weather-detail-card">
+                  <div class="detail-icon precip">
+                    <i class="fa-solid fa-cloud-rain"></i>
+                  </div>
+                  <div class="detail-info">
+                    <span class="detail-label">Precipitation</span>
+                    <span class="detail-value">${rainChance}%</span>
+                  </div>
+                </div>`;
+  WeatherDeatails.innerHTML = box;
+}
+function displayWeatherhourlyForecast() {
+  let box = "";
+  let currentTime = new Date(weatherData.current.time);
+
+  // نحدد الساعة الحالية في مصفوفة الساعات
+  let startIndex = weatherData.hourly.time.findIndex(function (time) {
+    return new Date(time).getTime() >= currentTime.getTime();
+  });
+
+  if (startIndex === -1) startIndex = 0;
+  for (let i = 0; i < startIndex + 24; i++) {
+    let temperature = weatherData.hourly.temperature_2m[i];
+    box = `<div class="hourly-item now">
+                    <span class="hourly-time">${i === startIndex ? "Now" : hour}</span>
+                    <div class="hourly-icon">
+                      <i class="fa-solid fa-sun"></i>
+                    </div>
+                    <span class="hourly-temp">${temperature}°</span>
+                  </div>`;
+    hourlyForecast.innerHTML = box;
+  }
 }
