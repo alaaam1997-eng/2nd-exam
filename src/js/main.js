@@ -101,8 +101,9 @@ sideBarLinks.forEach(function (button) {
       section.classList.remove("active");
     });
     const target = document.getElementById(this.dataset.view);
-    console.log(target);
+    let viewName = this.dataset.view.replace("-view", "");
 
+    history.pushState(null, "", `#${viewName}`);
     target.classList.add("active");
     sideBar.classList.remove("open");
   });
@@ -868,3 +869,15 @@ function displayCurrencies() {
   currencyTo.innerHTML = box;
 }
 convertBtn.addEventListener("click", currency);
+let today = new Date();
+
+let formattedDate1 = today.toLocaleString("en-US", {
+  weekday: "short",
+  month: "short",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: true,
+});
+
+document.getElementById("current-datetime").innerHTML = formattedDate1;
