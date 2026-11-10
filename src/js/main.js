@@ -530,6 +530,7 @@ function displayCitySunRise() {
   let dawn = sunriseData.results.civil_twilight_begin.split("T")[1].slice(0, 5);
   let dusk = sunriseData.results.civil_twilight_end.split("T")[1].slice(0, 5);
   let dayLength = sunriseData.results.day_length;
+  let dayPercentage = (dayLength / 86400) * 100;
   let nightLength = 86400 - dayLength;
   let hours = Math.floor(dayLength / 3600);
   let minutes = Math.floor((dayLength % 3600) / 60);
@@ -606,7 +607,7 @@ function displayCitySunRise() {
                     <div class="label">Daylight</div>
                   </div>
                   <div class="day-stat">
-                    <div class="value">44.6%</div>
+                    <div class="value">${dayPercentage.toFixed(1)}%</div>
                     <div class="label">of 24 Hours</div>
                   </div>
                   <div class="day-stat">
