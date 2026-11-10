@@ -47,14 +47,23 @@
         <nav class="sidebar-nav">
           <div class="nav-section">
             <span class="nav-section-title">Main</span>
-            <a href="#dashboard-view" data-view="dashboard-view" class="nav-item active">
+            <a
+              href="#dashboard-view"
+              data-view="dashboard-view"
+              class="nav-item active"
+            >
               <i class="fa-solid fa-house"></i><span>Dashboard</span>
             </a>
           </div>
 
           <div class="nav-section">
             <span class="nav-section-title">Explore</span>
-            <a href="#holidays-view" data-view="holidays-view" onclick="" class="nav-item">
+            <a
+              href="#holidays-view"
+              data-view="holidays-view"
+              onclick=""
+              class="nav-item"
+            >
               <i class="fa-solid fa-calendar-days"></i><span>Holidays</span>
             </a>
             <a href="#events-view" data-view="events-view" class="nav-item">
@@ -63,7 +72,11 @@
             <a href="#weather-view" data-view="weather-view" class="nav-item">
               <i class="fa-solid fa-cloud-sun"></i><span>Weather</span>
             </a>
-            <a href="#long-weekends-view" data-view="long-weekends-view" class="nav-item">
+            <a
+              href="#long-weekends-view"
+              data-view="long-weekends-view"
+              class="nav-item"
+            >
               <i class="fa-solid fa-umbrella-beach"></i
               ><span>Long Weekends</span>
             </a>
@@ -75,7 +88,11 @@
               <i class="fa-solid fa-money-bill-transfer"></i
               ><span>Currency</span>
             </a>
-            <a href="#sun-times-view" data-view="sun-times-view" class="nav-item">
+            <a
+              href="#sun-times-view"
+              data-view="sun-times-view"
+              class="nav-item"
+            >
               <i class="fa-solid fa-sun"></i><span>Sun Times</span>
             </a>
           </div>
@@ -244,105 +261,17 @@
                 <h2><i class="fa-solid fa-flag"></i> Country Information</h2>
               </div>
               <div id="dashboard-country-info" class="dashboard-country-info">
-                <!-- <div class="dashboard-country-header">
-                  <img
-                    src="https://flagcdn.com/w160/eg.png"
-                    alt="Egypt"
-                    class="dashboard-country-flag"
-                  />
-                  <div class="dashboard-country-title">
-                    <h3>Egypt</h3>
-                    <p class="official-name">Arab Republic of Egypt</p>
-                    <span class="region"
-                      ><i class="fa-solid fa-location-dot"></i> Africa •
-                      Northern Africa</span
-                    >
-                  </div>
-                </div>
-
-                <div class="dashboard-local-time">
-                  <div class="local-time-display">
-                    <i class="fa-solid fa-clock"></i>
-                    <span class="local-time-value" id="country-local-time"
-                      >08:30:45 AM</span
-                    >
-                    <span class="local-time-zone">UTC+02:00</span>
-                  </div>
-                </div>
-
-                <div class="dashboard-country-grid">
-                  <div class="dashboard-country-detail">
-                    <i class="fa-solid fa-building-columns"></i>
-                    <span class="label">Capital</span>
-                    <span class="value">Cairo</span>
-                  </div>
-                  <div class="dashboard-country-detail">
-                    <i class="fa-solid fa-users"></i>
-                    <span class="label">Population</span>
-                    <span class="value">102,334,403</span>
-                  </div>
-                  <div class="dashboard-country-detail">
-                    <i class="fa-solid fa-ruler-combined"></i>
-                    <span class="label">Area</span>
-                    <span class="value">1,002,450 km²</span>
-                  </div>
-                  <div class="dashboard-country-detail">
-                    <i class="fa-solid fa-globe"></i>
-                    <span class="label">Continent</span>
-                    <span class="value">Africa</span>
-                  </div>
-                  <div class="dashboard-country-detail">
-                    <i class="fa-solid fa-phone"></i>
-                    <span class="label">Calling Code</span>
-                    <span class="value">+20</span>
-                  </div>
-                  <div class="dashboard-country-detail">
-                    <i class="fa-solid fa-car"></i>
-                    <span class="label">Driving Side</span>
-                    <span class="value">Right</span>
-                  </div>
-                  <div class="dashboard-country-detail">
-                    <i class="fa-solid fa-calendar-week"></i>
-                    <span class="label">Week Starts</span>
-                    <span class="value">Saturday</span>
-                  </div>
-                </div>
-
-                <div class="dashboard-country-extras">
-                  <div class="dashboard-country-extra">
-                    <h4><i class="fa-solid fa-coins"></i> Currency</h4>
-                    <div class="extra-tags">
-                      <span class="extra-tag">Egyptian Pound (EGP £)</span>
+                <div id="dashboard-content" class="dashboard-grid">
+                  <div class="empty-state">
+                    <div class="empty-icon">
+                      <i class="svg-inline--fa fa-globe"></i>
                     </div>
-                  </div>
-                  <div class="dashboard-country-extra">
-                    <h4><i class="fa-solid fa-language"></i> Languages</h4>
-                    <div class="extra-tags">
-                      <span class="extra-tag">Arabic</span>
-                    </div>
-                  </div>
-                  <div class="dashboard-country-extra">
-                    <h4>
-                      <i class="fa-solid fa-map-location-dot"></i> Neighbors
-                    </h4>
-                    <div class="extra-tags">
-                      <span class="extra-tag border-tag">LBY</span>
-                      <span class="extra-tag border-tag">SDN</span>
-                      <span class="extra-tag border-tag">ISR</span>
-                      <span class="extra-tag border-tag">PSE</span>
-                    </div>
+                    <p>Select a country to view detailed information</p>
+                    <button class="btn-primary" id="start-exploring-btn">
+                      <i class="fa-solid fa-compass"></i> Start Exploring
+                    </button>
                   </div>
                 </div>
-
-                <div class="dashboard-country-actions">
-                  <a
-                    href="https://www.google.com/maps/place/Egypt"
-                    target="_blank"
-                    class="btn-map-link"
-                  >
-                    <i class="fa-solid fa-map"></i> View on Google Maps
-                  </a>
-                </div> -->
               </div>
             </div>
           </section>
@@ -371,128 +300,22 @@
 
             <div id="holidays-content" class="holidays-content">
               <!-- Static Egypt 2026 Holidays -->
-              <div class="holiday-card">
-                <div class="holiday-card-header">
-                  <div class="holiday-date-box">
-                    <span class="day">1</span><span class="month">Jan</span>
+              <div id="holiday-content" class="holiday-grid">
+                <div class="empty-state">
+                  <div class="empty-icon">
+                    <i class="svg-inline--fa fa-calendar-xmark"></i>
                   </div>
-                  <button class="holiday-action-btn">
-                    <i class="fa-regular fa-heart"></i>
+                  <h3>No Country Selected</h3>
+                  <p>
+                    Select a country from the dashboard to explore public
+                    holidays
+                  </p>
+                  <button class="btn-primary" id="start-exploring-btn">
+                    <i class="fa-solid fa-compass"></i>
+                    Go to Dashboard
                   </button>
                 </div>
-                <h3>New Year's Day</h3>
-                <p class="holiday-name">New Year's Day</p>
-                <div class="holiday-card-footer">
-                  <span class="holiday-day-badge"
-                    ><i class="fa-regular fa-calendar"></i> Thursday</span
-                  >
-                  <span class="holiday-type-badge">Public</span>
-                </div>
               </div>
-              <!--             
-            <div class="holiday-card">
-              <div class="holiday-card-header">
-                <div class="holiday-date-box"><span class="day">7</span><span class="month">Jan</span></div>
-                <button class="holiday-action-btn"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <h3>Coptic Christmas</h3>
-              <p class="holiday-name">Orthodox Christmas Day</p>
-              <div class="holiday-card-footer">
-                <span class="holiday-day-badge"><i class="fa-regular fa-calendar"></i> Wednesday</span>
-                <span class="holiday-type-badge">Public</span>
-              </div>
-            </div>
-            
-            <div class="holiday-card">
-              <div class="holiday-card-header">
-                <div class="holiday-date-box"><span class="day">25</span><span class="month">Jan</span></div>
-                <button class="holiday-action-btn"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <h3>Revolution Day</h3>
-              <p class="holiday-name">25 January Revolution</p>
-              <div class="holiday-card-footer">
-                <span class="holiday-day-badge"><i class="fa-regular fa-calendar"></i> Sunday</span>
-                <span class="holiday-type-badge">Public</span>
-              </div>
-            </div>
-            
-            <div class="holiday-card">
-              <div class="holiday-card-header">
-                <div class="holiday-date-box"><span class="day">30</span><span class="month">Mar</span></div>
-                <button class="holiday-action-btn"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <h3>Eid al-Fitr</h3>
-              <p class="holiday-name">End of Ramadan</p>
-              <div class="holiday-card-footer">
-                <span class="holiday-day-badge"><i class="fa-regular fa-calendar"></i> Monday</span>
-                <span class="holiday-type-badge">Public</span>
-              </div>
-            </div>
-            
-            <div class="holiday-card">
-              <div class="holiday-card-header">
-                <div class="holiday-date-box"><span class="day">25</span><span class="month">Apr</span></div>
-                <button class="holiday-action-btn"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <h3>Sinai Liberation Day</h3>
-              <p class="holiday-name">Sinai Liberation Day</p>
-              <div class="holiday-card-footer">
-                <span class="holiday-day-badge"><i class="fa-regular fa-calendar"></i> Saturday</span>
-                <span class="holiday-type-badge">Public</span>
-              </div>
-            </div>
-            
-            <div class="holiday-card">
-              <div class="holiday-card-header">
-                <div class="holiday-date-box"><span class="day">1</span><span class="month">May</span></div>
-                <button class="holiday-action-btn"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <h3>Labour Day</h3>
-              <p class="holiday-name">International Workers' Day</p>
-              <div class="holiday-card-footer">
-                <span class="holiday-day-badge"><i class="fa-regular fa-calendar"></i> Friday</span>
-                <span class="holiday-type-badge">Public</span>
-              </div>
-            </div>
-            
-            <div class="holiday-card">
-              <div class="holiday-card-header">
-                <div class="holiday-date-box"><span class="day">6</span><span class="month">Jun</span></div>
-                <button class="holiday-action-btn"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <h3>Eid al-Adha</h3>
-              <p class="holiday-name">Feast of Sacrifice</p>
-              <div class="holiday-card-footer">
-                <span class="holiday-day-badge"><i class="fa-regular fa-calendar"></i> Saturday</span>
-                <span class="holiday-type-badge">Public</span>
-              </div>
-            </div>
-            
-            <div class="holiday-card">
-              <div class="holiday-card-header">
-                <div class="holiday-date-box"><span class="day">23</span><span class="month">Jul</span></div>
-                <button class="holiday-action-btn"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <h3>Revolution Day</h3>
-              <p class="holiday-name">23 July Revolution</p>
-              <div class="holiday-card-footer">
-                <span class="holiday-day-badge"><i class="fa-regular fa-calendar"></i> Thursday</span>
-                <span class="holiday-type-badge">Public</span>
-              </div>
-            </div>
-            
-            <div class="holiday-card">
-              <div class="holiday-card-header">
-                <div class="holiday-date-box"><span class="day">6</span><span class="month">Oct</span></div>
-                <button class="holiday-action-btn"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <h3>Armed Forces Day</h3>
-              <p class="holiday-name">October War Victory Day</p>
-              <div class="holiday-card-footer">
-                <span class="holiday-day-badge"><i class="fa-regular fa-calendar"></i> Tuesday</span>
-                <span class="holiday-type-badge">Public</span>
-              </div>
-            </div> -->
             </div>
           </section>
 
@@ -519,142 +342,22 @@
               </div>
             </div>
 
-            <div id="events-content" class="events-grid-layout">
-              <!-- <div class="event-card">
-                <div class="event-card-image">
-                  <img
-                    src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=200&fit=crop"
-                    alt="Jazz Night"
-                  />
-                  <span class="event-card-category">Music</span>
-                  <button class="event-card-save">
-                    <i class="fa-regular fa-heart"></i>
-                  </button>
+            <div id="events-content" class="events-grid-layout holiday-grid">
+              <div class="empty-state">
+                <div class="empty-icon">
+                  <i class="svg-inline--fa fa-ticket"></i>
                 </div>
-                <div class="event-card-body">
-                  <h3>Jazz Night Live in Cairo</h3>
-                  <div class="event-card-info">
-                    <div>
-                      <i class="fa-regular fa-calendar"></i>Feb 15, 2026 at
-                      20:00
-                    </div>
-                    <div>
-                      <i class="fa-solid fa-location-dot"></i>Cairo Opera House,
-                      Cairo
-                    </div>
-                  </div>
-                  <div class="event-card-footer">
-                    <button class="btn-event">
-                      <i class="fa-regular fa-heart"></i> Save
-                    </button>
-                    <a href="#" class="btn-buy-ticket"
-                      ><i class="fa-solid fa-ticket"></i> Buy Tickets</a
-                    >
-                  </div>
-                </div>
-              </div> -->
-
-              <!-- <div class="event-card">
-                <div class="event-card-image">
-                  <img
-                    src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=200&fit=crop"
-                    alt="Football"
-                  />
-                  <span class="event-card-category">Sports</span>
-                  <button class="event-card-save">
-                    <i class="fa-regular fa-heart"></i>
-                  </button>
-                </div>
-                <div class="event-card-body">
-                  <h3>Football Match in Cairo</h3>
-                  <div class="event-card-info">
-                    <div>
-                      <i class="fa-regular fa-calendar"></i>Feb 22, 2026 at
-                      19:00
-                    </div>
-                    <div>
-                      <i class="fa-solid fa-location-dot"></i>Cairo Stadium,
-                      Cairo
-                    </div>
-                  </div>
-                  <div class="event-card-footer">
-                    <button class="btn-event">
-                      <i class="fa-regular fa-heart"></i> Save
-                    </button>
-                    <a href="#" class="btn-buy-ticket"
-                      ><i class="fa-solid fa-ticket"></i> Buy Tickets</a
-                    >
-                  </div>
-                </div>
+                <h3>No City Selected</h3>
+                <p>
+                  Select a country and city from the dashboard to discover
+                  events
+                </p>
+                <button class="btn-primary" id="start-exploring-btn">
+                  <i class="fa-solid fa-compass"></i>
+                  Go to Dashboard
+                </button>
               </div>
-
-              <div class="event-card">
-                <div class="event-card-image">
-                  <img
-                    src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=400&h=200&fit=crop"
-                    alt="Theatre"
-                  />
-                  <span class="event-card-category">Arts</span>
-                  <button class="event-card-save">
-                    <i class="fa-regular fa-heart"></i>
-                  </button>
-                </div>
-                <div class="event-card-body">
-                  <h3>Theatre Play in Cairo</h3>
-                  <div class="event-card-info">
-                    <div>
-                      <i class="fa-regular fa-calendar"></i>Mar 5, 2026 at 21:00
-                    </div>
-                    <div>
-                      <i class="fa-solid fa-location-dot"></i>Cairo Cultural
-                      Center, Cairo
-                    </div>
-                  </div>
-                  <div class="event-card-footer">
-                    <button class="btn-event">
-                      <i class="fa-regular fa-heart"></i> Save
-                    </button>
-                    <a href="#" class="btn-buy-ticket"
-                      ><i class="fa-solid fa-ticket"></i> Buy Tickets</a
-                    >
-                  </div>
-                </div>
-              </div>
-
-              <div class="event-card">
-                <div class="event-card-image">
-                  <img
-                    src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=200&fit=crop"
-                    alt="Symphony"
-                  />
-                  <span class="event-card-category">Music</span>
-                  <button class="event-card-save">
-                    <i class="fa-regular fa-heart"></i>
-                  </button>
-                </div>
-                <div class="event-card-body">
-                  <h3>Symphony Orchestra in Cairo</h3>
-                  <div class="event-card-info">
-                    <div>
-                      <i class="fa-regular fa-calendar"></i>Mar 12, 2026 at
-                      19:30
-                    </div>
-                    <div>
-                      <i class="fa-solid fa-location-dot"></i>Cairo Opera House,
-                      Cairo
-                    </div>
-                  </div>
-                  <div class="event-card-footer">
-                    <button class="btn-event">
-                      <i class="fa-regular fa-heart"></i> Save
-                    </button>
-                    <a href="#" class="btn-buy-ticket"
-                      ><i class="fa-solid fa-ticket"></i> Buy Tickets</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div> -->
+            </div>
           </section>
 
           <!-- ==================== WEATHER VIEW - STATIC CAIRO DATA ==================== -->
