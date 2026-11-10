@@ -6,6 +6,7 @@ const weatherHeroCard = document.querySelector(".weather-hero-card");
 const WeatherDeatails = document.querySelector(".weather-details-grid");
 const hourlyForecast = document.querySelector(".hourly-scroll");
 const dailyForecast = document.querySelector(".forecast-list");
+const weatherContent = document.querySelector("#weather-content");
 const sunTimesContent = document.querySelector("#sun-times-content");
 const countryInformaion = document.querySelector("#dashboard-country-info");
 const currencyFrom = document.querySelector("#currency-from");
@@ -83,8 +84,7 @@ globalSearchBtn.addEventListener("click", function () {
 //=====================removeCountry===================
 function removeCountry() {
   selectedDestination.classList.add("hidden");
-  countryInformaion.innerHTML = ""
-
+  countryInformaion.innerHTML = "";
 }
 //====================activeSideBar===================
 
@@ -640,6 +640,10 @@ function displayWeatherHeroCard() {
   let apparentTemperature = weatherData.current.apparent_temperature;
   let maxTemp = Math.max(...weatherData.daily.temperature_2m_max);
   let minTemp = Math.min(...weatherData.daily.temperature_2m_min);
+  let humidity = weatherData.current.relative_humidity_2m;
+  let windSpeed = weatherData.current.wind_speed_10m;
+  let uvIndex = weatherData.current.uv_index;
+  let rainChance = weatherData.hourly.precipitation_probability[0];
   let date = new Date(weatherData.current.time);
   let formattedDate = date.toLocaleDateString("en-US", {
     month: "long",
@@ -649,6 +653,12 @@ function displayWeatherHeroCard() {
   let dayName = date.toLocaleDateString("en-US", {
     weekday: "long",
   });
+  let currentTime = new Date(weatherData.current.time);
+  let startIndex = weatherData.hourly.time.findIndex(function (time) {
+    return new Date(time).getTime() >= currentTime.getTime();
+  });
+
+  if (startIndex === -1) startIndex = 0;
   function getWeatherCondition(code) {
     if (code === 0) {
       return "Clear sky";
@@ -674,7 +684,8 @@ function displayWeatherHeroCard() {
 
   let condition = getWeatherCondition(weatherCode);
 
-  box = `<div class="weather-location">
+  box = `<div class="weather-hero-card weather-sunny">
+  <div class="weather-location">
                   <i class="fa-solid fa-location-dot"></i>
                   <span>${selectedName}</span>
                   <span class="weather-time">${dayName}, ${formattedDate}</span>
@@ -701,16 +712,10 @@ function displayWeatherHeroCard() {
                       >
                     </div>
                   </div>
-                </div>`;
-  weatherHeroCard.innerHTML = box;
-}
-function displayWeatherDeatails() {
-  let box = "";
-  let humidity = weatherData.current.relative_humidity_2m;
-  let windSpeed = weatherData.current.wind_speed_10m;
-  let uvIndex = weatherData.current.uv_index;
-  let rainChance = weatherData.hourly.precipitation_probability[0];
-  box = `<div class="weather-detail-card">
+                </div>
+                </div>
+                <div class="weather-details-grid">
+                <div class="weather-detail-card">
                   <div class="detail-icon humidity">
                     <i class="fa-solid fa-droplet"></i>
                   </div>
@@ -745,59 +750,123 @@ function displayWeatherDeatails() {
                     <span class="detail-label">Precipitation</span>
                     <span class="detail-value">${rainChance}%</span>
                   </div>
-                </div>`;
-  WeatherDeatails.innerHTML = box;
+                </div>
+                </div>
+                <div class="weather-section">
+                <h3 class="weather-section-title">
+                  <i class="fa-solid fa-clock"></i> Hourly Forecast
+                </h3>
+                <div class="hourly-scroll">
+                ${hourlyBox}
+                </div>
+                </div>
+                              <div class="weather-section">
+                <h3 class="weather-section-title">
+                  <i class="fa-solid fa-calendar-week"></i> 7-Day Forecast
+                </h3>
+                <div class="forecast-list">
+                ${dailyBox}
+                </div>
+                </div>
+                `;
+  weatherContent.innerHTML = box;
 }
-function displayWeatherhourlyForecast() {
-  let box = "";
-  let currentTime = new Date(weatherData.current.time);
-  let startIndex = weatherData.hourly.time.findIndex(function (time) {
-    return new Date(time).getTime() >= currentTime.getTime();
+// function displayWeatherDeatails() {
+//   let box = "";
+//   // let humidity = weatherData.current.relative_humidity_2m;
+//   // let windSpeed = weatherData.current.wind_speed_10m;
+//   // let uvIndex = weatherData.current.uv_index;
+//   // let rainChance = weatherData.hourly.precipitation_probability[0];
+//   box = `<div class="weather-detail-card">
+//                   <div class="detail-icon humidity">
+//                     <i class="fa-solid fa-droplet"></i>
+//                   </div>
+//                   <div class="detail-info">
+//                     <span class="detail-label">Humidity</span>
+//                     <span class="detail-value">${humidity}%</span>
+//                   </div>
+//                 </div>
+//                 <div class="weather-detail-card">
+//                   <div class="detail-icon wind">
+//                     <i class="fa-solid fa-wind"></i>
+//                   </div>
+//                   <div class="detail-info">
+//                     <span class="detail-label">Wind</span>
+//                     <span class="detail-value">${windSpeed} km/h</span>
+//                   </div>
+//                 </div>
+//                 <div class="weather-detail-card">
+//                   <div class="detail-icon uv">
+//                     <i class="fa-solid fa-sun"></i>
+//                   </div>
+//                   <div class="detail-info">
+//                     <span class="detail-label">UV Index</span>
+//                     <span class="detail-value">${uvIndex}</span>
+//                   </div>
+//                 </div>
+//                 <div class="weather-detail-card">
+//                   <div class="detail-icon precip">
+//                     <i class="fa-solid fa-cloud-rain"></i>
+//                   </div>
+//                   <div class="detail-info">
+//                     <span class="detail-label">Precipitation</span>
+//                     <span class="detail-value">${rainChance}%</span>
+//                   </div>
+//                 </div>`;
+//   WeatherDeatails.innerHTML = box;
+// }
+// function displayWeatherhourlyForecast() {
+let hourlyBox = "";
+// let currentTime = new Date(weatherData.current.time);
+// let startIndex = weatherData.hourly.time.findIndex(function (time) {
+//   return new Date(time).getTime() >= currentTime.getTime();
+// });
+
+// if (startIndex === -1) startIndex = 0;
+for (let i = startIndex; i < startIndex + 24; i++) {
+  let temperature = Math.round(weatherData.hourly.temperature_2m[i]);
+  let time = new Date(weatherData.hourly.time[i]);
+
+  let hour = time.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    hour12: true,
+    timeZone: weatherData.timezone,
   });
-
-  if (startIndex === -1) startIndex = 0;
-  for (let i = startIndex; i < startIndex + 24; i++) {
-    let temperature = Math.round(weatherData.hourly.temperature_2m[i]);
-    let time = new Date(weatherData.hourly.time[i]);
-
-    let hour = time.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      hour12: true,
-      timeZone: weatherData.timezone,
-    });
-    box += `<div class="hourly-item ${i === startIndex ? "now" : ""}">
+  hourlyBox += `<div class="hourly-item ${i === startIndex ? "now" : ""}">
                     <span class="hourly-time">${i === startIndex ? "Now" : hour}</span>
                     <div class="hourly-icon">
                       <i class="fa-solid fa-sun"></i>
                     </div>
                     <span class="hourly-temp">${temperature}°</span>
                   </div>`;
-  }
-  hourlyForecast.innerHTML = box;
 }
-function displayWeatherdailyForecast() {
-  let box = "";
-  let currentTime = new Date(weatherData.current.time);
-  let startIndex = weatherData.daily.time.findIndex(function (time) {
-    return new Date(time).getTime() >= currentTime.getTime();
+// hourlyForecast.innerHTML = box;
+// }
+// function displayWeatherdailyForecast() {
+// let dailyBox = "";
+// let currentTime = new Date(weatherData.current.time);
+// let startIndex = weatherData.daily.time.findIndex(function (time) {
+//   return new Date(time).getTime() >= currentTime.getTime();
+// });
+// if (startIndex === -1) startIndex = 0;
+let dailyBox = "";
+
+for (let i = startIndex; i < 7; i++) {
+  let date = new Date(weatherData.daily.time[i]);
+
+  let dayDate = date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    timeZone: weatherData.timezone,
   });
-  if (startIndex === -1) startIndex = 0;
-  for (let i = startIndex; i < 7; i++) {
-    let date = new Date(weatherData.daily.time[i]);
+  let day = date.toLocaleDateString("en-US", {
+    weekday: "short",
+    timeZone: weatherData.timezone,
+  });
+  let maxTemp = Math.round(weatherData.daily.temperature_2m_max[i]);
+  let minTemp = Math.round(weatherData.daily.temperature_2m_min[i]);
 
-    let dayDate = date.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      timeZone: weatherData.timezone,
-    });
-    let day = date.toLocaleDateString("en-US", {
-      weekday: "short",
-      timeZone: weatherData.timezone,
-    });
-    let maxTemp = Math.round(weatherData.daily.temperature_2m_max[i]);
-    let minTemp = Math.round(weatherData.daily.temperature_2m_min[i]);
-
-    box += `<div class="forecast-day ${i === startIndex ? "today" : ""}">
+  dailyBox += `<div class="forecast-day ${i === startIndex ? "today" : ""}">
                     <div class="forecast-day-name">
                       <span class="day-label">${i === startIndex ? "Today" : day}</span
                       ><span class="day-date">${dayDate}</span>
@@ -811,10 +880,10 @@ function displayWeatherdailyForecast() {
                     </div>
                     <div class="forecast-precip"></div>
                   </div>`;
-  }
-
-  dailyForecast.innerHTML = box;
 }
+
+// dailyForecast.innerHTML = box;
+// }
 //=====================Currency================================
 async function getCurrencies() {
   let response = await fetch(
@@ -831,7 +900,7 @@ async function getCurrencies() {
   exchangeRates = data.conversion_rates;
   displayCurrencies();
   currency();
-  displayPopularCurrencies()
+  displayPopularCurrencies();
 }
 
 let formattedDate = "";
@@ -872,9 +941,7 @@ function displayCurrencies() {
   currencyTo.innerHTML = box;
 }
 function displayPopularCurrencies() {
-  let popularCurrencies = document.querySelectorAll(
-    ".popular-currency-card"
-  );
+  let popularCurrencies = document.querySelectorAll(".popular-currency-card");
 
   popularCurrencies.forEach(function (card) {
     let currencyCode = card.querySelector(".code").innerHTML;
