@@ -61,9 +61,6 @@ globalCountry.addEventListener("change", function () {
     </button>`;
   getCountryHoliDay();
   getLongWeekend();
-    getCityCoordinates();
-
-  // getCountries();
   getEventCard();
   getCities();
 });
@@ -552,7 +549,7 @@ async function getCityCoordinates() {
     `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,uv_index&hourly=temperature_2m,weather_code,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_direction_10m_dominant&timezone=auto`,
   );
   weatherData = await response3.json();
-console.log(weatherData);
+  console.log(weatherData);
 
   displayCitySunRise();
   displayWeather();
@@ -681,80 +678,77 @@ function displayWeather() {
   let dayName = date.toLocaleDateString("en-US", {
     weekday: "long",
   });
-  console.log(temperature,apparentTemperature,humidity,windSpeed,uvIndex,formattedDate,dayName
-  );
-  
 
-//   box += `               <div class="weather-hero-card weather-sunny">
-//                 <div class="weather-location">
-//                   <i class="fa-solid fa-location-dot"></i>
-//                   <span>${country}</span>
-//                   <span class="weather-time">${dayName}, ${formattedDate}</span>
-//                 </div>
-//                 <div class="weather-hero-main">
-//                   <div class="weather-hero-left">
-//                     <div class="weather-hero-icon">
-//                       <i class="fa-solid fa-sun"></i>
-//                     </div>
-//                     <div class="weather-hero-temp">
-//                       <span class="temp-value">${temperature}</span>
-//                       <span class="temp-unit">°C</span>
-//                     </div>
-//                   </div>
-//                   <div class="weather-hero-right">
-//                     <div class="weather-condition">Clear sky</div>
-//                     <div class="weather-feels">Feels like ${apparentTemperature}°C</div>
-//                     <div class="weather-high-low">
-//                       <span class="high"
-//                         ><i class="fa-solid fa-arrow-up"></i> 25°</span
-//                       >
-//                       <span class="low"
-//                         ><i class="fa-solid fa-arrow-down"></i> 12°</span
-//                       >
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
+  box += `               <div class="weather-hero-card weather-sunny">
+                <div class="weather-location">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <span>${country}</span>
+                  <span class="weather-time">${dayName}, ${formattedDate}</span>
+                </div>
+                <div class="weather-hero-main">
+                  <div class="weather-hero-left">
+                    <div class="weather-hero-icon">
+                      <i class="fa-solid fa-sun"></i>
+                    </div>
+                    <div class="weather-hero-temp">
+                      <span class="temp-value">${temperature}</span>
+                      <span class="temp-unit">°C</span>
+                    </div>
+                  </div>
+                  <div class="weather-hero-right">
+                    <div class="weather-condition">Clear sky</div>
+                    <div class="weather-feels">Feels like ${apparentTemperature}°C</div>
+                    <div class="weather-high-low">
+                      <span class="high"
+                        ><i class="fa-solid fa-arrow-up"></i> 25°</span
+                      >
+                      <span class="low"
+                        ><i class="fa-solid fa-arrow-down"></i> 12°</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-//               <!-- Weather Details Grid -->
-//               <div class="weather-details-grid">
-//                 <div class="weather-detail-card">
-//                   <div class="detail-icon humidity">
-//                     <i class="fa-solid fa-droplet"></i>
-//                   </div>
-//                   <div class="detail-info">
-//                     <span class="detail-label">${humidity}</span>
-//                     <span class="detail-value">45%</span>
-//                   </div>
-//                 </div>
-//                 <div class="weather-detail-card">
-//                   <div class="detail-icon wind">
-//                     <i class="fa-solid fa-wind"></i>
-//                   </div>
-//                   <div class="detail-info">
-//                     <span class="detail-label">Wind</span>
-//                     <span class="detail-value">${windSpeed} km/h</span>
-//                   </div>
-//                 </div>
-//                 <div class="weather-detail-card">
-//                   <div class="detail-icon uv">
-//                     <i class="fa-solid fa-sun"></i>
-//                   </div>
-//                   <div class="detail-info">
-//                     <span class="detail-label">UV Index</span>
-//                     <span class="detail-value">${uvIndex}</span>
-//                   </div>
-//                 </div>
-//                 <div class="weather-detail-card">
-//                   <div class="detail-icon precip">
-//                     <i class="fa-solid fa-cloud-rain"></i>
-//                   </div>
-//                   <div class="detail-info">
-//                     <span class="detail-label">Precipitation</span>
-//                     <span class="detail-value">0%</span>
-//                   </div>
-//                 </div>
-//               </div>
-// `;
+              <!-- Weather Details Grid -->
+              <div class="weather-details-grid">
+                <div class="weather-detail-card">
+                  <div class="detail-icon humidity">
+                    <i class="fa-solid fa-droplet"></i>
+                  </div>
+                  <div class="detail-info">
+                    <span class="detail-label">${humidity}</span>
+                    <span class="detail-value">45%</span>
+                  </div>
+                </div>
+                <div class="weather-detail-card">
+                  <div class="detail-icon wind">
+                    <i class="fa-solid fa-wind"></i>
+                  </div>
+                  <div class="detail-info">
+                    <span class="detail-label">Wind</span>
+                    <span class="detail-value">${windSpeed} km/h</span>
+                  </div>
+                </div>
+                <div class="weather-detail-card">
+                  <div class="detail-icon uv">
+                    <i class="fa-solid fa-sun"></i>
+                  </div>
+                  <div class="detail-info">
+                    <span class="detail-label">UV Index</span>
+                    <span class="detail-value">${uvIndex}</span>
+                  </div>
+                </div>
+                <div class="weather-detail-card">
+                  <div class="detail-icon precip">
+                    <i class="fa-solid fa-cloud-rain"></i>
+                  </div>
+                  <div class="detail-info">
+                    <span class="detail-label">Precipitation</span>
+                    <span class="detail-value">0%</span>
+                  </div>
+                </div>
+              </div>
+`;
   sunTimesContent.innerHTML = box;
 }
