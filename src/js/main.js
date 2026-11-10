@@ -815,7 +815,7 @@ function displayWeatherdailyForecast() {
     return new Date(time).getTime() >= currentTime.getTime();
   });
   if (startIndex === -1) startIndex = 0;
-  for (let i = 0; i < 7; i++) {
+  for (let i = startIndex; i < 7; i++) {
     let date = new Date(weatherData.daily.time[i]);
 
     let dayDate = date.toLocaleDateString("en-US", {
