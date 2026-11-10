@@ -524,14 +524,6 @@ async function getCityCoordinates() {
 let sunriseData = [];
 function displayCitySunRise() {
   let box = "";
-  let sunSet = sunriseData.results.sunset.split("T")[1].slice(0, 5);
-  let sunRise = sunriseData.results.sunrise.split("T")[1].slice(0, 5);
-  let solarNoon = sunriseData.results.solar_noon.split("T")[1].slice(0, 5);
-  let dawn = sunriseData.results.civil_twilight_begin.split("T")[1].slice(0, 5);
-  let dusk = sunriseData.results.civil_twilight_end.split("T")[1].slice(0, 5);
-  let dayLength = sunriseData.results.day_length;
-  let hours = Math.floor(dayLength / 3600);
-  let minutes = Math.floor((dayLength % 3600) / 60);
   function convertTo12Hour(time) {
     return new Date(time).toLocaleTimeString("en-US", {
       hour: "2-digit",
@@ -539,12 +531,14 @@ function displayCitySunRise() {
       hour12: true,
     });
   }
-  sunSet = convertTo12Hour(sunSet);
-  sunRise = convertTo12Hour(sunRise);
-  solarNoon = convertTo12Hour(solarNoon);
-  dawn = convertTo12Hour(dawn);
-  dusk = convertTo12Hour(dusk);
-
+  let sunSet = convertTo12Hour(sunriseData.results.sunset.split("T")[1].slice(0, 5));
+  let sunRise = convertTo12Hour(sunriseData.results.sunrise.split("T")[1].slice(0, 5));
+  let solarNoon = convertTo12Hour(sunriseData.results.solar_noon.split("T")[1].slice(0, 5));
+  let dawn = convertTo12Hour(sunriseData.results.civil_twilight_begin.split("T")[1].slice(0, 5));
+  let dusk = convertTo12Hour(sunriseData.results.civil_twilight_end.split("T")[1].slice(0, 5));
+  let dayLength = sunriseData.results.day_length;
+  let hours = Math.floor(dayLength / 3600);
+  let minutes = Math.floor((dayLength % 3600) / 60);
   box += `              <div class="sun-main-card">
                 <div class="sun-main-header">
                   <div class="sun-location">
