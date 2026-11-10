@@ -5,6 +5,7 @@ const eventsContent = document.querySelector("#events-content");
 const weatherHeroCard = document.querySelector(".weather-hero-card");
 const WeatherDeatails = document.querySelector(".weather-details-grid");
 const hourlyForecast = document.querySelector(".hourly-scroll");
+const dailyForecast = document.querySelector(".forecast-list");
 const sunTimesContent = document.querySelector("#sun-times-content");
 const countryInformaion = document.querySelector("#dashboard-country-info");
 const currencyFrom = document.querySelector("#currency-from");
@@ -556,6 +557,7 @@ async function getCityCoordinates() {
   displayWeatherHeroCard();
   displayWeatherDeatails();
   displayWeatherhourlyForecast();
+  displayWeatherdailyForecast();
 }
 let sunriseData = [];
 function displayCitySunRise() {
@@ -788,7 +790,7 @@ function displayWeatherhourlyForecast() {
 
   if (startIndex === -1) startIndex = 0;
   for (let i = startIndex; i < startIndex + 24; i++) {
-    let temperature = weatherData.hourly.temperature_2m[i];
+    let temperature = Math.round(weatherData.daily.temperature_2m[i]);
     let time = new Date(weatherData.hourly.time[i]);
 
     let hour = time.toLocaleTimeString("en-US", {
@@ -796,7 +798,7 @@ function displayWeatherhourlyForecast() {
       hour12: true,
       timeZone: weatherData.timezone,
     });
-    box += `<div class="hourly-item ${i === startIndex ? "Now" : hour}">
+    box += `<div class="hourly-item ${i === startIndex ? "now" : ""}">
                     <span class="hourly-time">${i === startIndex ? "Now" : hour}</span>
                     <div class="hourly-icon">
                       <i class="fa-solid fa-sun"></i>
@@ -805,4 +807,41 @@ function displayWeatherhourlyForecast() {
                   </div>`;
   }
   hourlyForecast.innerHTML = box;
+}
+function displayWeatherdailyForecast() {
+  let box = "";
+  let currentTime = new Date(weatherData.current.time);
+  let startIndex = weatherData.daily.time.findIndex(function (time) {
+    return new Date(time).getTime() >= currentTime.getTime();
+  });
+  if (startIndex === -1) startIndex = 0;
+  for (let i = startIndex; i < startIndex + 7; i++) {
+    let date = new Date(weatherData.daily.time[i]);
+
+    let dayDate = date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      timeZone: weatherData.timezone,
+    });
+
+    let maxTemp = Math.round(weatherData.daily.temperature_2m_max[i]);
+    let minTemp = Math.round(weatherData.daily.temperature_2m_min[i]);
+
+    box += `<div class="forecast-day today">
+                    <div class="forecast-day-name">
+                      <span class="day-label ${i === startIndex ? "Today" : ""}">${i === startIndex ? "Today" : day}</span
+                      ><span class="day-date">${dayDate}</span>
+                    </div>
+                    <div class="forecast-icon">
+                      <i class="fa-solid fa-sun"></i>
+                    </div>
+                    <div class="forecast-temps">
+                      <span class="temp-max">${maxTemp}°</span
+                      ><span class="temp-min">${minTemp}°</span>
+                    </div>
+                    <div class="forecast-precip"></div>
+                  </div>`;
+  }
+
+  dailyForecast.innerHTML = box;
 }
