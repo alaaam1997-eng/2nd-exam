@@ -1,4 +1,5 @@
 const globalCountry = document.querySelector("#global-country");
+const globalSearchBtn = document.querySelector("#global-search-btn");
 const globalCity = document.querySelector("#global-city");
 const eventsContent = document.querySelector("#events-content");
 const sunTimesContent = document.querySelector("#sun-times-content");
@@ -69,6 +70,9 @@ globalCity.addEventListener("change", function () {
   getEventCard();
   getCityCoordinates();
 });
+globalSearchBtn.addEventListener("click", function () {
+  getCountries()
+});
 //=====================removeCountry===================
 function removeCountry() {
   selectedDestination.classList.add("hidden");
@@ -91,6 +95,7 @@ sideBarLinks.forEach(function (button) {
     });
     const target = document.getElementById(this.dataset.view);
     target.classList.add("active");
+    sideBar.classList.remove("open");
   });
 });
 //==================holidaysSection==================
