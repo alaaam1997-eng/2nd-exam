@@ -459,7 +459,7 @@ async function getCountry1() {
   let city1 = globalCity.value;
   let country1 = globalCountry.value;
   const response = await fetch(
-    `https://app.ticketmaster.com/discovery/v2/events.json?apikey=VwECw2OiAzxVzIqnwmKJUG41FbeXJk1y&city=${city1}&${country1}=US&size=20`,
+    `https://app.ticketmaster.com/discovery/v2/events.json?apikey=VwECw2OiAzxVzIqnwmKJUG41FbeXJk1y&city=${city1}&${country1.toUpperCase()}=US&size=20`,
   );
   let data = await response.json();
   eventCard = data._embedded?.events || [];
