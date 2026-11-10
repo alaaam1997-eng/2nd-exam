@@ -555,7 +555,7 @@ async function getCityCoordinates() {
   displayCitySunRise();
   displayWeatherHeroCard();
   displayWeatherDeatails();
-  displayWeatherDeatailshourlyForecast();
+  displayWeatherhourlyForecast();
 }
 let sunriseData = [];
 function displayCitySunRise() {
