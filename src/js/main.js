@@ -883,3 +883,4 @@ let formattedDate1 = today.toLocaleString("en-US", {
 });
 
 document.getElementById("current-datetime").innerHTML = formattedDate1;
+console.log(document.getElementById("plans-content"));
