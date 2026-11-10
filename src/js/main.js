@@ -61,10 +61,11 @@ globalCountry.addEventListener("change", function () {
     </button>`;
   getCountryHoliDay();
   getLongWeekend();
+    getCityCoordinates();
+
   // getCountries();
   getEventCard();
   getCities();
-  displayWeather();
 });
 //=============================================
 globalCity.addEventListener("change", function () {
@@ -551,6 +552,7 @@ async function getCityCoordinates() {
     `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,uv_index&hourly=temperature_2m,weather_code,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_direction_10m_dominant&timezone=auto`,
   );
   weatherData = await response3.json();
+console.log(weatherData);
 
   displayCitySunRise();
   displayWeather();
