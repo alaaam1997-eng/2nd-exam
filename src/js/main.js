@@ -662,10 +662,11 @@ function displayCitySunRise() {
 let weatherData = {};
 function displayWeather() {
   let box = "";
-  let country = globalCountry.value;
+  let selectedName = globalCountry.options[globalCountry.selectedIndex].text;
   let temperature = weatherData.current.temperature_2m;
   let apparentTemperature = weatherData.current.apparent_temperature;
-  let humidity = weatherData.current.relative_humidity_2m;
+  let maxTemp = Math.max(...weatherData.daily.temperature_2m_max);
+  let minTemp = Math.min(...weatherData.daily.temperature_2m_min);
   let windSpeed = weatherData.current.wind_speed_10m;
   let uvIndex = weatherData.current.uv_index;
   let date = new Date(weatherData.current.time);
@@ -677,10 +678,34 @@ function displayWeather() {
   let dayName = date.toLocaleDateString("en-US", {
     weekday: "long",
   });
+  function getWeatherCondition(code) {
+    if (code === 0) {
+      return "Clear sky";
+    } else if (code === 1 || code === 2) {
+      return "Mainly clear";
+    } else if (code === 3) {
+      return "Overcast";
+    } else if (code === 45 || code === 48) {
+      return "Fog";
+    } else if (code >= 51 && code <= 67) {
+      return "Rain";
+    } else if (code >= 71 && code <= 77) {
+      return "Snow";
+    } else if (code >= 80 && code <= 82) {
+      return "Rain showers";
+    } else if (code >= 95) {
+      return "Thunderstorm";
+    } else {
+      return "Unknown";
+    }
+  }
+  let weatherCode = weatherData.current.weather_code;
+
+let condition = getWeatherCondition(weatherCode);
 
   box = `<div class="weather-location">
                   <i class="fa-solid fa-location-dot"></i>
-                  <span>${country}</span>
+                  <span>${selectedName}</span>
                   <span class="weather-time">${dayName}, ${formattedDate}</span>
                 </div>
                 <div class="weather-hero-main">
@@ -694,14 +719,14 @@ function displayWeather() {
                     </div>
                   </div>
                   <div class="weather-hero-right">
-                    <div class="weather-condition">Clear sky</div>
+                    <div class="weather-condition">${condition}</div>
                     <div class="weather-feels">Feels like ${apparentTemperature}°C</div>
                     <div class="weather-high-low">
                       <span class="high"
-                        ><i class="fa-solid fa-arrow-up"></i> 25°</span
+                        ><i class="fa-solid fa-arrow-up"></i> ${maxTemp}°</span
                       >
                       <span class="low"
-                        ><i class="fa-solid fa-arrow-down"></i> 12°</span
+                        ><i class="fa-solid fa-arrow-down"></i> ${minTemp}°</span
                       >
                     </div>
                   </div>
