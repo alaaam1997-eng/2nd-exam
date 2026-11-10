@@ -519,10 +519,10 @@ async function getCityCoordinates() {
     `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=today&formatted=0`,
   );
   sunriseData = await response2.json();
-  displayCity();
+  displayCitySunRise();
 }
 let sunriseData = [];
-function displayCity() {
+function displayCitySunRise() {
   let box = "";
   let sunSet = sunriseData.results.sunset.split("T")[1].slice(0, 5);
   let sunRise = sunriseData.results.sunrise.split("T")[1].slice(0, 5);
