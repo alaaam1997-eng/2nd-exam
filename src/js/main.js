@@ -536,9 +536,10 @@ function displayEventCard() {
 async function getCityCoordinates() {
   let city = globalCity.value;
   let country = globalCountry.value;
+ let selectedName = globalCountry.options[globalCountry.selectedIndex].text;
 
   let response = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city) ||encodeURIComponent(country)}&count=10&countryCode=${country}&language=en&format=json`,
+    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city) ||encodeURIComponent(selectedName)}&count=10&countryCode=${country}&language=en&format=json`,
   );
   let data = await response.json();
   let lat = data.results[0].latitude;
