@@ -782,22 +782,27 @@ function displayWeatherDeatails() {
 function displayWeatherhourlyForecast() {
   let box = "";
   let currentTime = new Date(weatherData.current.time);
-
-  // نحدد الساعة الحالية في مصفوفة الساعات
   let startIndex = weatherData.hourly.time.findIndex(function (time) {
     return new Date(time).getTime() >= currentTime.getTime();
   });
 
   if (startIndex === -1) startIndex = 0;
-  for (let i = 0; i < startIndex + 24; i++) {
+  for (let i = startIndex; i < startIndex + 24; i++) {
     let temperature = weatherData.hourly.temperature_2m[i];
-    box = `<div class="hourly-item now">
+    let time = new Date(weatherData.hourly.time[i]);
+
+    let hour = time.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      hour12: true,
+      timeZone: weatherData.timezone,
+    });
+    box += `<div class="hourly-item now">
                     <span class="hourly-time">${i === startIndex ? "Now" : hour}</span>
                     <div class="hourly-icon">
                       <i class="fa-solid fa-sun"></i>
                     </div>
                     <span class="hourly-temp">${temperature}°</span>
                   </div>`;
-    hourlyForecast.innerHTML = box;
   }
+  hourlyForecast.innerHTML = box;
 }
