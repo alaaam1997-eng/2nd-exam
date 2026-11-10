@@ -530,10 +530,12 @@ function displayCitySunRise() {
   let dawn = sunriseData.results.civil_twilight_begin.split("T")[1].slice(0, 5);
   let dusk = sunriseData.results.civil_twilight_end.split("T")[1].slice(0, 5);
   let dayLength = sunriseData.results.day_length;
+  let nightLength = 86400 - dayLength;
   let hours = Math.floor(dayLength / 3600);
   let minutes = Math.floor((dayLength % 3600) / 60);
-    let nightHourLength = 24 - hours
-    let nightMinutesLength = 60 - minutes
+  let hoursNight = Math.floor(nightLength / 3600);
+  let minutesNight = Math.floor((nightLength % 3600) / 60);
+
 
   box += `              <div class="sun-main-card">
                 <div class="sun-main-header">
@@ -608,7 +610,7 @@ function displayCitySunRise() {
                     <div class="label">of 24 Hours</div>
                   </div>
                   <div class="day-stat">
-                    <div class="value">${nightHourLength}h ${nightMinutesLength}m</div>
+                    <div class="value">${hoursNight}h ${minutesNight}m</div>
                     <div class="label">Darkness</div>
                   </div>
                 </div>
