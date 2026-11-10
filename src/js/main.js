@@ -851,7 +851,7 @@ for (let i = startIndex; i < startIndex + 24; i++) {
 // if (startIndex === -1) startIndex = 0;
 let dailyBox = "";
 
-for (let i = startIndex; i < 7; i++) {
+for (let i = 0; i < 7; i++) {
   let date = new Date(weatherData.daily.time[i]);
 
   let dayDate = date.toLocaleDateString("en-US", {
