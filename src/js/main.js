@@ -83,6 +83,8 @@ globalSearchBtn.addEventListener("click", function () {
 //=====================removeCountry===================
 function removeCountry() {
   selectedDestination.classList.add("hidden");
+  countryInformaion = ""
+
 }
 //====================activeSideBar===================
 
