@@ -18,6 +18,10 @@ const sideBarLinks = document.querySelectorAll(".sidebar-nav .nav-item");
 const mainView = document.querySelectorAll("#main-content .view");
 const holidaysContent = document.querySelector("#holidays-content");
 const lwContent = document.querySelector("#lw-content");
+const currencyAmountInput = document.querySelector(".currency-amount-input");
+const conversionDisplay = document.querySelector(".conversion-display");
+const convertBtn = document.querySelector("#convert-btn");
+const exchangeRateInfo = document.querySelector(".exchange-rate-info");
 const viewHeaderSelection = document.querySelectorAll(".view-header-selection");
 //=============open & close sideBar===============
 mobileMenuBtn.addEventListener("click", function () {
@@ -447,48 +451,6 @@ function displayCity() {
 
   globalCity.innerHTML = box;
 }
-//=====================================================
-let exchangeRates = {};
-async function getCurrencies() {
-  let response = await fetch(
-    `https://v6.exchangerate-api.com/v6/805842951e5953ad31497176/latest/USD`,
-  );
-
-  let data = await response.json();
-
-  exchangeRates = data.conversion_rates;
-
-  displayCurrencies();
-}
-
-// async function getCurrencies() {
-//   let from = currencyFrom.value;
-//   let to = currencyTo.value;
-//   let response = await fetch(
-//     `https://v6.exchangerate-api.com/v6/805842951e5953ad31497176/pair/${from}/${to}/100`,
-//   );
-
-//   let data = await response.json();
-
-//   exchangeRates = data.conversion_rates;
-// }
-
-getCurrencies();
-
-function displayCurrencies() {
-  let box = "";
-
-  for (let currency in exchangeRates) {
-    box += `
-      <option value="${currency}">${currency}</option>
-    `;
-  }
-
-  currencyFrom.innerHTML = box;
-  currencyTo.innerHTML = box;
-
-  //   currencyTo.value = "EGP";
-}
 //===================eventCard======================
 async function getEventCard() {
   let city1 = globalCity.value;
@@ -850,3 +812,59 @@ function displayWeatherdailyForecast() {
 
   dailyForecast.innerHTML = box;
 }
+//=====================Currency================================
+async function getCurrencies() {
+  let response = await fetch(
+    `https://v6.exchangerate-api.com/v6/d355d665e1da06577e652fbc/latest/USD`,
+  );
+
+  let data = await response.json();
+  let lastUpdate = new Date(data.time_last_update_utc);
+  formattedDate = lastUpdate.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+  exchangeRates = data.conversion_rates;
+  displayCurrencies();
+  currency();
+}
+
+let formattedDate = "";
+let exchangeRates = {};
+getCurrencies();
+function currency() {
+  let from = currencyFrom.value;
+  let to = currencyTo.value;
+  let amount = Number(currencyAmountInput.value);
+  let rate = exchangeRates[to];
+  let convertedAmount = amount * rate;
+
+  conversionDisplay.innerHTML = `<div class="conversion-from">
+                    <span class="amount">${amount}</span>
+                    <span class="currency-code">${from}</span>
+                  </div>
+                  <div class="conversion-equals">
+                    <i class="fa-solid fa-equals"></i>
+                  </div>
+                  <div class="conversion-to">
+                    <span class="amount">${convertedAmount.toFixed(2)}</span>
+                    <span class="currency-code">${to}</span>
+                  </div>  `;
+  exchangeRateInfo.innerHTML = `<p>${amount} ${from} = ${convertedAmount.toFixed(2)} ${to}</p>
+                  <small>Last updated: ${formattedDate}</small>`;
+}
+
+function displayCurrencies() {
+  let box = "";
+
+  for (let currency in exchangeRates) {
+    box += `
+      <option value="${currency}">${currency}</option>
+    `;
+  }
+
+  currencyFrom.innerHTML = box;
+  currencyTo.innerHTML = box;
+}
+convertBtn.addEventListener("click", currency);
