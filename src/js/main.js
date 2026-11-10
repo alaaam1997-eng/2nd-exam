@@ -2,6 +2,7 @@ const globalCountry = document.querySelector("#global-country");
 const globalSearchBtn = document.querySelector("#global-search-btn");
 const globalCity = document.querySelector("#global-city");
 const eventsContent = document.querySelector("#events-content");
+const weatherHeroCard = document.querySelector(".weather-hero-card");
 const sunTimesContent = document.querySelector("#sun-times-content");
 const countryInformaion = document.querySelector("#dashboard-country-info");
 const currencyFrom = document.querySelector("#currency-from");
@@ -677,8 +678,7 @@ function displayWeather() {
     weekday: "long",
   });
 
-  box = `               <div class="weather-hero-card weather-sunny">
-                <div class="weather-location">
+  box = `<div class="weather-location">
                   <i class="fa-solid fa-location-dot"></i>
                   <span>${country}</span>
                   <span class="weather-time">${dayName}, ${formattedDate}</span>
@@ -705,48 +705,6 @@ function displayWeather() {
                       >
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <!-- Weather Details Grid -->
-              <div class="weather-details-grid">
-                <div class="weather-detail-card">
-                  <div class="detail-icon humidity">
-                    <i class="fa-solid fa-droplet"></i>
-                  </div>
-                  <div class="detail-info">
-                    <span class="detail-label">${humidity}</span>
-                    <span class="detail-value">45%</span>
-                  </div>
-                </div>
-                <div class="weather-detail-card">
-                  <div class="detail-icon wind">
-                    <i class="fa-solid fa-wind"></i>
-                  </div>
-                  <div class="detail-info">
-                    <span class="detail-label">Wind</span>
-                    <span class="detail-value">${windSpeed} km/h</span>
-                  </div>
-                </div>
-                <div class="weather-detail-card">
-                  <div class="detail-icon uv">
-                    <i class="fa-solid fa-sun"></i>
-                  </div>
-                  <div class="detail-info">
-                    <span class="detail-label">UV Index</span>
-                    <span class="detail-value">${uvIndex}</span>
-                  </div>
-                </div>
-                <div class="weather-detail-card">
-                  <div class="detail-icon precip">
-                    <i class="fa-solid fa-cloud-rain"></i>
-                  </div>
-                  <div class="detail-info">
-                    <span class="detail-label">Precipitation</span>
-                    <span class="detail-value">0%</span>
-                  </div>
-                </div>
-              </div>
-`;
-  sunTimesContent.innerHTML = box;
+                </div>`;
+  weatherHeroCard.innerHTML = box;
 }
