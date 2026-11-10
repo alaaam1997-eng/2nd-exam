@@ -64,7 +64,7 @@ globalCountry.addEventListener("change", function () {
   getLongWeekend();
   getEventCard();
   getCities();
-  getCityCoordinates()
+  getCityCoordinates();
 });
 //=============================================
 globalCity.addEventListener("change", function () {
@@ -536,13 +536,17 @@ function displayEventCard() {
 async function getCityCoordinates() {
   let city = globalCity.value;
   let country = globalCountry.value;
- let selectedName = globalCountry.options[globalCountry.selectedIndex].text;
-let searchName = city || selectedName;
+  let selectedName = globalCountry.options[globalCountry.selectedIndex].text;
+  let searchName = city || selectedName;
 
   let response = await fetch(
     `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(searchName)}&count=10&countryCode=${country}&language=en&format=json`,
   );
   let data = await response.json();
+  if (!data.results || data.results.length === 0) {
+    console.log("Location not found");
+    return;
+  }
   let lat = data.results[0].latitude;
   let lon = data.results[0].longitude;
   let response2 = await fetch(
@@ -704,7 +708,7 @@ function displayWeather() {
   }
   let weatherCode = weatherData.current.weather_code;
 
-let condition = getWeatherCondition(weatherCode);
+  let condition = getWeatherCondition(weatherCode);
 
   box = `<div class="weather-location">
                   <i class="fa-solid fa-location-dot"></i>
