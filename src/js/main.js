@@ -87,8 +87,15 @@ globalSearchBtn.addEventListener("click", function () {
   getCountries();
 });
 //=====================removeCountry===================
-console.log(weatherEmpty);
-
+function removeCountry() {
+  selectedDestination.classList.add("hidden");
+  countryInformaion.innerHTML = dashboardEmpty.innerHTML;
+  holidaysContent.innerHTML = holidayEmpty.innerHTML;
+  eventsContent.innerHTML = eventsEmpty.innerHTML;
+  weatherContent.innerHTML = weatherEmpty.innerHTML;
+  lwContent.innerHTML = lwEmpty.innerHTML;
+  sunTimesContent.innerHTML = sunTimesEmpty.innerHTML;
+}
 
 //====================activeSideBar===================
 
@@ -114,19 +121,17 @@ sideBarLinks.forEach(function (button) {
     sideBar.classList.remove("open");
   });
 });
-dashboardButtons.forEach(function (button) {
-  button.addEventListener("click", function () {
-    mainView.forEach(function (section) {
-      section.classList.remove("active");
-    });
-
-    document.getElementById("dashboard-view").classList.add("active");
-
-    history.pushState(null, "", "#dashboard");
-
-    sideBar.classList.remove("open");
+function goToDashboard() {
+  mainView.forEach(function (section) {
+    section.classList.remove("active");
   });
-});
+
+  document.getElementById("dashboard-view").classList.add("active");
+
+  history.pushState(null, "", "#dashboard");
+
+  sideBar.classList.remove("open");
+}
 //==================holidaysSection==================
 async function getCountryHoliDay() {
   const countryCode = globalCountry.value;
@@ -947,12 +952,3 @@ let formattedDate1 = today.toLocaleString("en-US", {
 });
 
 document.getElementById("current-datetime").innerHTML = formattedDate1;
-function removeCountry() {
-  selectedDestination.classList.add("hidden");
-  countryInformaion.innerHTML = dashboardEmpty.innerHTML;
-  holidaysContent.innerHTML = holidayEmpty.innerHTML;
-  eventsContent.innerHTML = eventsEmpty.innerHTML;
-  weatherContent.innerHTML = weatherEmpty.innerHTML;
-  lwContent.innerHTML = lwEmpty.innerHTML;
-  sunTimesContent.innerHTML = sunTimesEmpty.innerHTML;
-}
