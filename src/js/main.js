@@ -27,7 +27,7 @@ const dashboardEmpty = document.querySelector("#dashboard-empty");
 const sunTimesEmpty = document.querySelector("#sunTimes-empty");
 const holidayEmpty = document.querySelector("#holiday-content");
 const weatherEmpty = document.querySelector("#weather-empty");
-const lwEmpty = document.querySelector("#lwEmpty");
+const lwEmpty = document.querySelector("#lw-empty");
 const eventsEmpty = document.querySelector("#events-empty");
 //=============open & close sideBar===============
 mobileMenuBtn.addEventListener("click", function () {
@@ -87,17 +87,9 @@ globalSearchBtn.addEventListener("click", function () {
   getCountries();
 });
 //=====================removeCountry===================
-console.log(dashboardHeader);
+console.log(weatherEmpty);
 
-function removeCountry() {
-  selectedDestination.classList.add("hidden");
-  countryInformaion.innerHTML = dashboardEmpty.innerHTML;
-  holidaysContent.innerHTML = holidayEmpty.innerHTML;
-  eventsContent.innerHTML = eventsEmpty.innerHTML;
-  weatherContent.innerHTML = weatherEmpty.innerHTML;
-  lwContent.innerHTML = lwEmpty.innerHTML;
-  sunTimesEmpty.innerHTML = sunTimesEmpty.innerHTML;
-}
+
 //====================activeSideBar===================
 
 sideBarLinks.forEach(function (link) {
@@ -955,4 +947,12 @@ let formattedDate1 = today.toLocaleString("en-US", {
 });
 
 document.getElementById("current-datetime").innerHTML = formattedDate1;
-console.log(document.getElementById("plans-content"));
+function removeCountry() {
+  selectedDestination.classList.add("hidden");
+  countryInformaion.innerHTML = dashboardEmpty.innerHTML;
+  holidaysContent.innerHTML = holidayEmpty.innerHTML;
+  eventsContent.innerHTML = eventsEmpty.innerHTML;
+  weatherContent.innerHTML = weatherEmpty.innerHTML;
+  lwContent.innerHTML = lwEmpty.innerHTML;
+  sunTimesEmpty.innerHTML = sunTimesEmpty.innerHTML;
+}
