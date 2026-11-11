@@ -23,6 +23,11 @@ const exchangeRateInfo = document.querySelector(".exchange-rate-info");
 const viewHeaderSelection = document.querySelectorAll(".view-header-selection");
 const dashboardButtons = document.querySelectorAll(".go-dashboard");
 const dashboardHeader = document.querySelector("#dashboard-header");
+const sunTimesEmpty = document.querySelector("#sunTimes-empty");
+const holidayEmpty = document.querySelector("#holiday-empty");
+const weatherEmpty = document.querySelector("#weather-empty");
+const lwEmpty = document.querySelector("#lw-empty");
+const eventsEmpty = document.querySelector("#events-empty");
 //=============open & close sideBar===============
 mobileMenuBtn.addEventListener("click", function () {
   sideBar.classList.add("open");
@@ -86,11 +91,11 @@ console.log(dashboardHeader);
 function removeCountry() {
   selectedDestination.classList.add("hidden");
   countryInformaion.innerHTML = dashboardHeader.innerHTML;
-  countryInformaion.innerHTML = holidaysContent.innerHTML;
-  countryInformaion.innerHTML = eventsContent.innerHTML;
-  countryInformaion.innerHTML = weatherContent.innerHTML;
-  countryInformaion.innerHTML = lwContent.innerHTML;
-  countryInformaion.innerHTML = sunTimesContent.innerHTML;
+  holidaysContent.innerHTML = holidayEmpty.innerHTML;
+  eventsContent.innerHTML = eventsEmpty.innerHTML;
+  weatherContent.innerHTML = weatherEmpty.innerHTML;
+  lwContent.innerHTML = lwEmpty.innerHTML;
+  sunTimesEmpty.innerHTML = sunTimesEmpty.innerHTML;
 }
 //====================activeSideBar===================
 
