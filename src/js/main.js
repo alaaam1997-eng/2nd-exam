@@ -85,12 +85,12 @@ console.log(dashboardHeader);
 
 function removeCountry() {
   selectedDestination.classList.add("hidden");
-  countryInformaion.innerHTML = dashboardHeader;
-  countryInformaion.innerHTML = holidaysContent;
-  countryInformaion.innerHTML = eventsContent;
-  countryInformaion.innerHTML = weatherContent;
-  countryInformaion.innerHTML = lwContent;
-  countryInformaion.innerHTML = sunTimesContent;
+  countryInformaion.innerHTML = dashboardHeader.innerHTML;
+  countryInformaion.innerHTML = holidaysContent.innerHTML;
+  countryInformaion.innerHTML = eventsContent.innerHTML;
+  countryInformaion.innerHTML = weatherContent.innerHTML;
+  countryInformaion.innerHTML = lwContent.innerHTML;
+  countryInformaion.innerHTML = sunTimesContent.innerHTML;
 }
 //====================activeSideBar===================
 
