@@ -27,7 +27,7 @@ const dashboardEmpty = document.querySelector("#dashboard-empty");
 const sunTimesEmpty = document.querySelector("#sunTimes-empty");
 const holidayEmpty = document.querySelector("#holiday-content");
 const weatherEmpty = document.querySelector("#weather-empty");
-const lwEmpty = document.querySelector("#long-weekends-content");
+const lwEmpty = document.querySelector("#lwEmpty");
 const eventsEmpty = document.querySelector("#events-empty");
 //=============open & close sideBar===============
 mobileMenuBtn.addEventListener("click", function () {

@@ -260,14 +260,15 @@
               <div class="section-header" id="dashboard-header">
                 <h2><i class="fa-solid fa-flag"></i> Country Information</h2>
               </div>
-              <div id="dashboard-country-info" class="dashboard-country-info">
-                <div id="dashboard-content" class="dashboard-grid">
-                  <div class="empty-state">
-                    <div class="empty-icon">
-                      <i class="fa-solid fa-globa"></i>
-                    </div>
-                    <p>Select a country to view detailed information</p>
+              <div
+                id="dashboard-country-info"
+                class="dashboard-country-info dashboard-grid"
+              >
+                <div class="empty-state" id="dashboard-empty">
+                  <div class="empty-icon">
+                    <i class="fa-solid fa-globa"></i>
                   </div>
+                  <p>Select a country to view detailed information</p>
                 </div>
               </div>
             </div>
@@ -295,23 +296,20 @@
               </div>
             </div>
 
-            <div id="holidays-content" class="holidays-content">
+            <div id="holidays-content" class="holidays-content holiday-grid">
               <!-- Static Egypt 2026 Holidays -->
-              <div id="holiday-content" class="holiday-grid">
-                <div class="empty-state" id="dashboard-empty">
-                  <div class="empty-icon">
-                    <i class="fa-solid fa-calendar-days"></i>
-                  </div>
-                  <h3>No Country Selected</h3>
-                  <p>
-                    Select a country from the dashboard to explore public
-                    holidays
-                  </p>
-                  <button class="btn-primary go-dashboard">
-                    <i class="fa-solid fa-compass"></i>
-                    Go to Dashboard
-                  </button>
+              <div class="empty-state" id="holiday-empty">
+                <div class="empty-icon">
+                  <i class="fa-solid fa-calendar-days"></i>
                 </div>
+                <h3>No Country Selected</h3>
+                <p>
+                  Select a country from the dashboard to explore public holidays
+                </p>
+                <button class="btn-primary go-dashboard">
+                  <i class="fa-solid fa-compass"></i>
+                  Go to Dashboard
+                </button>
               </div>
             </div>
           </section>
@@ -424,21 +422,19 @@
             </div>
 
             <div id="lw-content" class="lw-grid">
-              <div id="long-weekends-content" class="lw-grid">
-                <div class="empty-state" id="lw-empty">
-                  <div class="empty-icon">
-                    <i class="fa-solid fa-umbrella-beach"></i>
-                  </div>
-                  <h3>No Country Selected</h3>
-                  <p>
-                    Select a country from the dashboard to discover long weekend
-                    opportunities
-                  </p>
-                  <button class="btn-primary go-dashboard">
-                    <i class="fa-solid fa-compass"></i>
-                    Go to Dashboard
-                  </button>
+              <div class="empty-state" id="lw-empty">
+                <div class="empty-icon">
+                  <i class="fa-solid fa-umbrella-beach"></i>
                 </div>
+                <h3>No Country Selected</h3>
+                <p>
+                  Select a country from the dashboard to discover long weekend
+                  opportunities
+                </p>
+                <button class="btn-primary go-dashboard">
+                  <i class="fa-solid fa-compass"></i>
+                  Go to Dashboard
+                </button>
               </div>
             </div>
           </section>
@@ -657,7 +653,8 @@
                 </div>
                 <h3>No City Selected</h3>
                 <p>
-                  Select a country and city from the dashboard to see sunrise and sunset times
+                  Select a country and city from the dashboard to see sunrise
+                  and sunset times
                 </p>
                 <button class="btn-primary go-dashboard">
                   <i class="fa-solid fa-compass"></i>
@@ -715,7 +712,10 @@
                   Start exploring and save holidays, events, or long weekends
                   you like!
                 </p>
-                <button class="btn-primary go-dashboard" id="start-exploring-btn">
+                <button
+                  class="btn-primary go-dashboard"
+                  id="start-exploring-btn"
+                >
                   <i class="fa-solid fa-compass"></i> Start Exploring
                 </button>
               </div>
