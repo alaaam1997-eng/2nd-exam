@@ -22,7 +22,7 @@ const convertBtn = document.querySelector("#convert-btn");
 const exchangeRateInfo = document.querySelector(".exchange-rate-info");
 const viewHeaderSelection = document.querySelectorAll(".view-header-selection");
 const dashboardButtons = document.querySelectorAll(".go-dashboard");
-const dashboardHeader = document.querySelectorAll("#dashboard-header");
+const dashboardHeader = document.querySelector("#dashboard-header");
 //=============open & close sideBar===============
 mobileMenuBtn.addEventListener("click", function () {
   sideBar.classList.add("open");
@@ -81,6 +81,8 @@ globalSearchBtn.addEventListener("click", function () {
   getCountries();
 });
 //=====================removeCountry===================
+console.log(dashboardHeader);
+
 function removeCountry() {
   selectedDestination.classList.add("hidden");
   countryInformaion.innerHTML = dashboardHeader;
