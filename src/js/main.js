@@ -23,6 +23,7 @@ const exchangeRateInfo = document.querySelector(".exchange-rate-info");
 const viewHeaderSelection = document.querySelectorAll(".view-header-selection");
 const dashboardButtons = document.querySelectorAll(".go-dashboard");
 const dashboardHeader = document.querySelector("#dashboard-header");
+const dashboardEmpty = document.querySelector("#dashboard-empty");
 const sunTimesEmpty = document.querySelector("#sunTimes-empty");
 const holidayEmpty = document.querySelector("#holiday-empty");
 const weatherEmpty = document.querySelector("#weather-empty");
@@ -90,7 +91,7 @@ console.log(dashboardHeader);
 
 function removeCountry() {
   selectedDestination.classList.add("hidden");
-  countryInformaion.innerHTML = dashboardHeader.innerHTML;
+  countryInformaion.innerHTML = dashboardEmpty.innerHTML;
   holidaysContent.innerHTML = holidayEmpty.innerHTML;
   eventsContent.innerHTML = eventsEmpty.innerHTML;
   weatherContent.innerHTML = weatherEmpty.innerHTML;
