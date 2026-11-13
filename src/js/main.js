@@ -140,7 +140,6 @@ async function getCountryHoliDay() {
     `https://date.nager.at/api/v3/PublicHolidays/${year}/${countryCode}`,
   );
   countryHoliDay = await response2.json();
-  //   displayContry();
   displayContryHoliDay();
 }
 let countryHoliDay = [];
@@ -875,8 +874,10 @@ function displayDailyForecast() {
 
 //=====================Currency================================
 async function getCurrencies() {
+    let from = currencyFrom.value;
+
   let response = await fetch(
-    `https://v6.exchangerate-api.com/v6/d355d665e1da06577e652fbc/latest/USD`,
+    `https://v6.exchangerate-api.com/v6/d355d665e1da06577e652fbc/latest/${from}`,
   );
 
   let data = await response.json();
